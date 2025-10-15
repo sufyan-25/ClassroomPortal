@@ -1,0 +1,104 @@
+﻿@model IEnumerable<SymphonyLimited.Models.About>
+@{
+    ViewData["Title"] = "About";
+}
+@{
+    Layout = "HomeLayout";
+}
+
+
+<!-- About Content -->
+<div class="container-fluid">
+    <div class="row align-items-center p-4 border-0 rounded" style="background-color:rgb(222,255,255,0.8);">
+        <!-- Image -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="text-center">
+                <img src="~/img/sym.jpg"
+                     alt="Symphony Logo"
+                     class="img-fluid rounded shadow-sm">
+            </div>
+        </div>
+        <!-- Text Content -->
+        <div class="col-lg-6">
+            <h1 class="fw-semibold mb-3">Who We Are</h1>
+            <p style="font-size:25px;">
+                <strong>Symphony Limited</strong> Institute of IT is an initiative founded to bridge gaps between academic learning and industry-ready skills in information technology.
+                Drawing inspiration from Symphony Limited (established in 2010 in Karachi, Pakistan), the Institute aims to carry forward its legacy of innovation, quality,
+                and excellence into the IT education domain.
+            </p>
+            <p style="font-size:25px;">
+                Our programs cover areas such as web development, software engineering, data analytics, cybersecurity, and cloud computing, ensuring students gain both theoretical understanding and hands-on experience.
+            </p>
+            <!-- Info Highlights -->
+            <div class="row mt-4">
+                <div class="col-sm-6 mb-3">
+                    <div class="p-3 border rounded text-center h-100">
+                        <h5 class="fw-bold mb-1">2010</h5>
+                        <p class="text-muted mb-0">Founded Year</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <div class="p-3 border rounded text-center h-100">
+                        <h5 class="fw-bold mb-1">1000+</h5>
+                        <p class="text-muted mb-0">Happy Students</p>
+                    </div>
+                </div>
+                <div class="row pt-3 mx-0">
+                    <div class="col-4 px-0">
+                        <div class="p-3 border rounded text-center h-100">
+                            <h1 class="text-success" data-toggle="counter-up">100</h1>
+                            <h6 class="text-uppercase text-white">Available<span class="d-block">Topics</span></h6>
+                        </div>
+                    </div>
+                    <div class="col-4 px-0">
+                        <div class="p-3 border rounded text-center h-100">
+                            <h1 class="text-primary" data-toggle="counter-up">20</h1>
+                            <h6 class="text-uppercase text-white">Available<span class="d-block">Courses</span></h6>
+                        </div>
+                    </div>
+                    <div class="col-4 px-0">
+                        <div class="p-3 border rounded text-center h-100">
+                            <h1 class="text-success" data-toggle="counter-up">123</h1>
+                            <h6 class="text-uppercase text-white">Skilled<span class="d-block">Instructors</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Content from Database -->
+    @{
+        var index = 1;
+    }
+    @foreach (var x in Model)
+    {
+<div class="container mt-5">
+        <div class="row align-items-center p-4 border-0 rounded @(index % 2 == 0 ? "" : "flex-row-reverse")" style="background-color:rgb(222,255,255,0.8);">
+        <!-- Text Content -->
+        <div class="col-lg-6">
+            <h1 class="fw-semibold mb-3">@x.title</h1>
+                <p style="font-size:25px;">@x.desc</p>
+        </div>
+        <!-- Image -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="text-center">
+                @if(!String.IsNullOrEmpty(x.base64)){
+                        <img src="data:image/jpeg;base64,@x.base64"
+                             alt="About Image"
+                             style="width: 100%; height: 350px; object-fit: cover;"
+                             class="img-fluid rounded shadow-sm">
+                }else{
+
+                <img src="~/img/sym.jpg"
+                     style="width: 100%; height: 350px; object-fit: cover;" 
+                     alt="Symphony"
+                     class="img-fluid rounded shadow-sm">
+                }
+            </div>
+        </div>
+        </div>
+</div>
+        index++;
+    }

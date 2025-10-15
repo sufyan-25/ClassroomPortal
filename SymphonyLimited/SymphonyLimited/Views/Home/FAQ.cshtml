@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SymphonyLimited.Models.FAQ>
+@{
+    Layout = "HomeLayout";
+}
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<div class="faq-container">
+    <input type="text" class="form-control" id="search" placeholder="Search" />
+</div>
+<!-- FAQ Container -->
+<div class="faq-container">
+    @foreach (var faq in Model)
+    {
+        <div class="faq-item" data-QnA="@faq.Question">
+            <div class="faq-question">
+                <span>@faq.Question</span>
+                <span class="arrow">&#9662;</span>
+            </div>
+            <div class="faq-answer">
+                @faq.Answer
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .faq-container {
+        max-width: 1500px;
+        margin: 20px auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .faq-item {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background-color: #f8f9fa;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        background-color: #1e3a8a; /* Royal Blue */
+        color: #ffffff;
+        padding: 15px 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+    }
+
+        .faq-question:hover {
+            background-color: #3b59c2;
+        }
+
+    .faq-answer {
+        padding: 15px 20px;
+        display: none;
+        background-color: #e5e7eb; /* Silver */
+        color: #1f2937;
+    }
+
+    .arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .arrow {
+        transform: rotate(180deg);
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".faq-question").click(function(){
+            var parent = $(this).closest(".faq-item");
+            parent.toggleClass("active");
+            parent.find(".faq-answer").slideToggle(300);
+        });
+
+    });
+
+    $(document).on("input","#search",function(){
+        let value = $(this).val().toLowerCase();
+
+        $(".faq-item").each(function(){
+        let dataValue = $(this).attr("data-QnA") || "";
+
+            if(dataValue.toLowerCase().includes(value)){
+                $(this).show();
+            }else{
+                $(this).hide();}
+        });
+        });
+
+</script>

@@ -1,0 +1,200 @@
+﻿@model SymphonyLimited.Models.Contact
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="content">
+    <div class="container-fluid p-4">
+        <div class="row g-3 mb-4 p-4 border rounded" style="background-color:#f8f9fa;">
+            <div class="tab-pane " id="faq" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-primary m-0">Manage Branches</h4>
+                    <button class="btn btn-success btn-md" onclick="openModal('Add Branch')">Add New Branch</button>
+                    <a asp-controller="Home" asp-action="Contact" class="btn btn-primary btn-md">Go to Contact Page</a>
+                </div>
+                <div class="faqContainer">
+                    <div id="spinnerLoader">
+                        <div class="spinner"></div>
+                        <p>Loading, please wait...</p>
+                    </div>
+                    @await Html.PartialAsync("_PartialContactList", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="text-danger">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+            <form asp-controller="Contact" asp-action="Create" id="editProductForm">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label asp-for="BranchName" class="form-label"></label>
+                        <input asp-for="BranchName" type="text" id="bName" class="form-control">
+                        <span asp-validation-for="BranchName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PTCL" class="form-label"></label>
+                        <input asp-for="PTCL" type="text" id="PTCL" class="form-control">
+                        <span asp-validation-for="PTCL" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Whatsapp" class="form-label"></label>
+                        <input asp-for="Whatsapp" type="text" id="whatsapp" class="form-control">
+                        <span asp-validation-for="Whatsapp" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Location" class="form-label"></label>
+                        <textarea asp-for="Location" type="text" id="locat" class="form-control"></textarea>
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-img-bottom">
+                    <iframe id="ifram" src=""
+                            width="250" height="150"
+                            style="border:0;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save">Save Changes</button>
+                    <button type="button" class="btn btn-primary" id="update">Update Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Confirmed Delete?</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmedDelete">Yes</button>
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // Load the controller of list (partial view)
+        $(document).ready(function () {
+            try{
+            $(".faqContainer").load("/Contact/List");
+            }catch(err){
+                console.log(err);
+            }
+         });
+        //Modal
+        const modal = new bootstrap.Modal(document.getElementById('editProductModal'));
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        function openModal() {
+          modal.show();
+          $("#title").text("Add Branch");
+          $("#update").hide();
+          $("#save").show();
+        }
+        function closeModal() {
+          $("#save").show();
+          $("#update").hide();
+        }
+        $("#locat").on("input",function(){
+            try{
+            $("#ifram").attr("src",$(this).val());
+            }catch(err){
+                console.log(err+"Error is in Karachi")
+            }
+        });
+        // Edit code for post data
+        function Manage(id="",action,arr){
+            if(arr==null){
+                console.log("Array is null")
+            }
+            try{
+            let data={Branch:arr[0],PTCL:arr[1],Whatsapp:arr[2],Location:arr[3],id:id};
+            $.ajax({
+                url:`Contact/${action}`,
+                type:'POST',
+                headers: { 'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
+                data: data,
+                dataType:'json',
+                success: function(result){
+                        console.log(result);
+                location.reload();},
+                error: function(result){
+                        console.log(result);}
+            });
+            }catch(err){
+                console.log(err+" Failed to Post Data "+action);
+            }
+        }
+
+        // Edit get value
+        let id;
+        $(document).on("click","#edit",function(){
+            $("#title").text("Edit Branch Detail");
+            id = $(this).closest("tr").find("td:eq(0)").text();
+            let oldName = $(this).closest("tr").find("td:eq(2)").text();
+            let oldPtcl = $(this).closest("tr").find("td:eq(3)").text();
+            let oldWha = $(this).closest("tr").find("td:eq(4)").text();
+            let oldLoc = $(this).closest("tr").find("iframe").attr("src");
+            console.log(id);
+            $("#bName").val(oldName);
+            $("#PTCL").val(oldPtcl);
+            $("#whatsapp").val(oldWha);
+            $("#locat").val(oldLoc).trigger("input");
+            $("#update").show();
+            $("#save").hide();
+            modal.show();
+         });
+         //Update Edit Value
+        $("#update").on("click",function(){
+            let array = [
+            $("#bName").val(),
+            $("#PTCL").val(),
+            $("#whatsapp").val(),
+            $("#locat").val()
+            ];
+            Manage(id,"Edit",array);
+            id;
+        });
+        //Delete Branches
+        $(document).on("click","#delete",function(){
+            id = $(this).closest("tr").find("td:eq(0)").text();
+            console.log(id);
+            deleteModal.show();
+        });
+        $("#confirmedDelete").on("click",function(){
+            Manage(id,"Delete","");
+            id;
+        });
+
+    </script>
+}

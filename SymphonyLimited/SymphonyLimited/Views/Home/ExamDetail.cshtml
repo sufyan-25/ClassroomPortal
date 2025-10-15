@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Exam>
+@{
+    ViewData["Title"] = "Entrance Exam Details";
+}
+@{
+    Layout = "HomeLayout";
+}
+<div class="container-fluid py-5">
+    <div class="container bg-light text-dark shadow-lg rounded-4 p-5">
+        @foreach (var ex in Model)
+        {
+            var examDate = DateTime.Parse(ex.ExamDate);
+            @if (examDate > DateTime.Now)
+            {
+                <h1 class="text-primary fw-bold text-center mb-4">Entrance Exam Details</h1>
+
+                <p class="lead text-secondary text-center">
+                    Explore details about upcoming and ongoing entrance examinations.
+                </p>
+
+                <hr class="border-primary opacity-75">
+
+                <div class="row align-items-center mb-5">
+                    <div class="col-md-6">
+                        <img src="~/img/exam.png" alt="Exam Image" class="img-fluid rounded shadow-sm">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="fw-semibold text-secondary">Overview</h4>
+                        <p class="text-muted">
+                            The Entrance Exam 2025 is conducted by Symphony Limited for admission into undergraduate IT programs.
+                            The test evaluates students’ knowledge in logical reasoning, computer fundamentals, and mathematics.
+                            Successful candidates will be eligible for admission and scholarship consideration.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><strong>Date: </strong>@examDate.ToString("dd MMMM yyyy")</li>
+                            <li><strong>Time: </strong>@ex.ExamTime</li>
+                            <li><strong>Mode: </strong> On-Campus</li>
+                            <li><strong>Venue:</strong> Symphony Limited, Main Campus, Karachi</li>
+                            <li><strong>Exam Duration:</strong> 3 Hours</li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="text-primary fw-bold mb-3">Exam Date Has Passed</h4>
+                        <p class="text-muted">
+                            No entrance exams are currently scheduled.
+                            Please check the Results section for announcements.
+                        </p>
+                    </div>
+                </div>
+            }
+        }
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body">
+                <h4 class="text-primary fw-bold mb-3">Registration & Fee Details</h4>
+                <p class="text-muted">
+                    Students interested in appearing for the exam must register at the Symphony Limited Admissions Office or through our official online portal.
+                    Once the form is submitted, a payment voucher will be generated.
+                </p>
+                <ul class="list-unstyled">
+                    <li><strong>Registration Start Date: </strong> On Announced Date</li>
+                    <li><strong>Last Date for Registration: </strong> Week before the Exam date</li>
+                    <li><strong>Exam Fee: </strong> PKR 300/-</li>
+                    <li><strong>Payment Method:</strong> Bank Deposit / Online Transfer</li>
+                </ul>
+                <button class="btn btn-primary mt-3">Download Registration Form</button>
+            </div>
+        </div>
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body">
+                <h4 class="text-primary fw-bold mb-3">Search The Results</h4>
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["Error"]</div>
+                }
+                <p class="text-muted">
+                    Students interested in appearing for the exam must register at the Symphony Limited Admissions Office or through our official online portal.
+                    Once the form is submitted, a payment voucher will be generated.
+                </p>
+                <form action="/Home/ResultSearch" method="post">
+                    <input type="number" class="form-control" name="id" placeholder="Search by Student ID" required/>
+                    <button type="submit" class="btn btn-primary mt-3">Download Registration Form</button>
+                </form>
+            </div>
+        </div>
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body">
+                <h4 class="text-primary fw-bold mb-3">Important Instructions</h4>
+                <ul class="text-muted">
+                    <li>Bring your original CNIC or B-Form and admit card on exam day.</li>
+                    <li>Reach the exam center at least 30 minutes before the start time.</li>
+                    <li>Use of mobile phones, calculators, or smart devices is strictly prohibited.</li>
+                    <li>Admit cards will be issued 3 days before the exam date.</li>
+                    <li>Results will be announced on the official website within 7 days after the exam.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h4 class="text-primary fw-bold mb-3">Need Help?</h4>
+                <p class="text-muted mb-2">For further assistance or queries regarding the exam, contact our admissions office:</p>
+                <ul class="list-unstyled mb-0">
+                    <li><strong>Email:</strong> admissions@symphonylimited.edu.pk</li>
+                    <li><strong>Phone:</strong> +92 21 3456 7890</li>
+                    <li><strong>Office Hours:</strong> Mon – Fri, 9:00 AM to 5:00 PM</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

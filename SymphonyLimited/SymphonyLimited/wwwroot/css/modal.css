@@ -1,0 +1,44 @@
+﻿/*Form Group*/
+
+/* --- Animation --- */
+@keyframes fadeIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* Skeleton loading for my partial pages*/
+#spinnerLoader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    color: #c0c0c0; /* silver text */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #c0c0c0; /* silver border */
+    border-top: 6px solid #1e3a8a; /* royal blue top */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

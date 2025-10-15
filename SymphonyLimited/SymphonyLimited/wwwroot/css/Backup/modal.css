@@ -1,0 +1,144 @@
+﻿/*Form Group*/
+.form-group span {
+    color: #e63946; /* Elegant red for validation */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+    text-align:center;
+}
+/* --- Modal Overlay --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 32, 39, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px);
+}
+
+/* --- Modal Container --- */
+.modal-container {
+    background: #f4f6f9;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(41, 57, 93, 0.4);
+    width: 600px;
+    max-width: 90%;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+}
+
+/* --- Header --- */
+.modal-header {
+    background: linear-gradient(135deg, #203a43, #2c5364);
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.close-btn {
+    font-size: 22px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+    .close-btn:hover {
+        color: #fff;
+    }
+
+/* --- Body --- */
+.modal-body {
+    padding: 20px;
+    color: #203a43;
+}
+
+/* --- Footer --- */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    background: #e9ecef;
+    padding: 12px 20px;
+}
+
+/* --- Buttons --- */
+.btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #203a43;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background: #2c5364;
+    }
+
+.btn-secondary {
+    background: #ccc;
+    color: #000;
+}
+
+    .btn-secondary:hover {
+        background: #aaa;
+    }
+
+/* --- Animation --- */
+@keyframes fadeIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* Skeleton loading for my partial pages*/
+#spinnerLoader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    color: #c0c0c0; /* silver text */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #c0c0c0; /* silver border */
+    border-top: 6px solid #1e3a8a; /* royal blue top */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

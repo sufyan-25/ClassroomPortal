@@ -1,0 +1,186 @@
+﻿@model SymphonyLimited.Models.Exam
+@{
+    ViewData["Title"] = "Exam Management";
+}
+<div class="content">
+    <div class="container-fluid p-4">
+        <div class="row g-3 mb-4 p-4 border rounded" style="background-color:#f8f9fa;">
+            <div id="result"></div>
+
+            <!-- Error Handling -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
+            <div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-primary m-0">Manage Exam Details</h4>
+                    <button class="btn btn-success btn-md" onclick="openModal()">Add Upcoming Exam</button>
+                </div>
+                <div class="faqContainer">
+                    <div id="spinnerLoader">
+                        <div class="spinner"></div>
+                        <p>Loading, please wait...</p>
+                    </div>
+                    @await Html.PartialAsync("_PartialExamList", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="text-danger">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+            <form asp-controller="Exam" asp-action="Create">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" type="text" id="question" class="form-control">
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Desc" class="form-label"></label>
+                        <input asp-for="Desc" type="text" id="question" class="form-control">
+                        <span asp-validation-for="Desc"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ExamDate" class="form-label"></label>
+                        <input asp-for="ExamDate" type="date" class="form-control">
+                        <span asp-validation-for="ExamDate"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ExamTime" class="form-label"></label>
+                        <input asp-for="ExamTime" type="time" class="form-control">
+                        <span asp-validation-for="ExamTime"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Fee" class="form-label"></label>
+                        <input asp-for="Fee" type="number" id="answer" class="form-control">
+                        <span asp-validation-for="Fee"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="save">Save Changes</button>
+                    <button type="button" class="btn btn-primary" id="update">Update Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Confirmed Delete?</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmedDelete">Yes</button>
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // Load the controller of list (partial view)
+        $(document).ready(function () {
+            try{
+            $(".faqContainer").load("/Exam/List");
+            }catch(err){
+                console.log(err);
+            }
+         });
+         //Modal
+         const modal = new bootstrap.Modal(document.getElementById('editModal'));
+         const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        function openModal() {
+          modal.show();
+          $("#title").text("Add Student");
+          $("#update").hide();
+          $("#save").show();
+        }
+        function closeModal() {
+          $("#save").show();
+          $("#update").hide();
+        }
+
+        // Edit code for post data
+        function Manage(id="",action,arr){
+            if(arr==null){
+                console.log("Array is null")
+            }
+            try{
+
+            let data={Question:arr[0],Answer:arr[1],id:id};
+            $.ajax({
+                url:`FAQ/${action}`,
+                type:'POST',
+                data: data,
+                dataType:'json',
+                success: function(result){
+                        console.log(result);
+                location.reload();},
+                error: function(result){
+                        console.log(result);}
+            });
+            }catch(err){
+                console.log(err+" Failed to Post Data "+action);
+            }
+        }
+        let id;
+        // Edit get value
+        // $(document).on("click","#edit",function(){
+        //     $("#title").text("Edit FAQ");
+        //     let oldQues = $(this).closest(".accordion-item").find("#editQue").text();
+        //     let oldAns = $(this).closest(".accordion-item").find("#editAns").text();
+        //     id = $(this).closest(".accordion-item").find(".FID").val();
+        //     $("#question").val(oldQues);
+        //     $("#answer").val(oldAns);
+        //     $("#update").show();
+        //     $("#save").hide();
+        //     modal.show();
+        //  });
+
+         //Update Edit Value
+        $("#update").on("click",()=>{
+            let array = [$("#question").val(),$("#answer").val()];
+            // Manage(id,"Edit",array);
+            id;
+        });
+
+        //Delete Branches
+        $(document).on("click","#delete",function(){
+            id = $(this).closest(".accordion-item").find(".FID").val();
+            console.log(id);
+            deleteModal.show();
+        });
+        $("#confirmedDelete").on("click",function(){
+            // Manage(id,"Delete","");
+            id;
+        });
+    </script>
+}

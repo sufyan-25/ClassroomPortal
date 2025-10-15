@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SymphonyLimited.Models.About>
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-danger">Nothing Found</div>
+}
+else
+{
+    <div class="container py-4">
+        @foreach (var x in Model)
+        {
+            <div class="row mb-3 align-items-center border rounded p-3">
+                <div id="findData" class="col-md-4">
+                    @if (!String.IsNullOrEmpty(x.thumb))
+                    {
+                        <img id="editImg" src="data:image/jpeg;base64,@x.thumb"
+                             alt="About Image"
+                             class="img-fluid rounded">
+                    }
+                    else
+                    {
+                        <img src="~/img/no_img.jpg"
+                             alt="About Image"
+                             class="img-fluid rounded">
+                    }
+                </div>
+                <div class="col-md-8">
+                    <input type="text" value="@x.AboutID" id="FID" hidden/>
+                    <h4>@x.title</h4>
+                    <p>@x.desc</p>
+                    <a id="edit" class="btn btn-primary btn-sm">Edit</a>
+                    <a id="delete" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+
+            </div>
+        }
+    </div>
+}

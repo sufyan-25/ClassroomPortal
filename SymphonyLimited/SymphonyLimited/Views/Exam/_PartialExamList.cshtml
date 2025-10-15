@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Exam>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-danger">Nothing Found</div>
+}
+else
+{
+    <!-- Table -->
+    <div class="table-responsive mb-4">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Desc</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Fee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@x.Id</td>
+                        <td>@x.Title</td>
+                        <td>@x.Desc</td>
+                        <td>@x.ExamDate</td>
+                        <td>@x.ExamTime</td>
+                        <td>@x.Fee</td>
+                        <td>
+                            <button class="btn-action" id="edit">Edit</button>
+                            <button class="btn-action" id="delete">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

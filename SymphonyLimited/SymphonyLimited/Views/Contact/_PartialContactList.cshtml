@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Contact>
+
+@if (Model == null || !Model.Any())
+{
+    <div>Nothing Found</div>
+}
+else
+{
+    <!-- Table -->
+    <div class="table-responsive mb-4">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Branch</th>
+                    <th>PTCL</th>
+                    <th>Whatsapp</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{var index = 1;}
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td hidden>@x.BranchID</td>
+                        <td>@index</td>
+                        <td>@x.BranchName</td>
+                        <td>@x.PTCL</td>
+                        <td>@x.Whatsapp</td>
+                        <td>
+                            <iframe src="@x.Location"
+                                    width="250" height="150"
+                                    style="border:0;" allowfullscreen=""
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </td>
+                        <td>
+                            <button class="btn-action" id="edit">Edit</button>
+                            <button class="btn-action" id="delete">Delete</button>
+                        </td>
+                    </tr>
+                        index++;
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs - Student View</title>
+  <link rel="stylesheet" href="./dashboard.css">
+  <link rel="stylesheet" href="./sidebar.css">
+</head>
+<body>
+  <header>
+    <h1>Frequently Asked Questions</h1>
+  </header>
+
+  <!-- Search -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search a question...">
+  </div>
+
+  <div class="faq-container" id="faqContainer">
+
+    <div class="faq-item">
+      <div class="faq-question">1) How to join the course? <span>➤</span></div>
+      <div class="faq-answer">You can join the course by following the procedures provided by the institute. The admin updates the instructions regularly.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">2) Why to join the institute? <span>➤</span></div>
+      <div class="faq-answer">The institute offers expert faculty, structured courses, lab facilities, and career guidance for students.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">3) When will Entrance Examinations be conducted? <span>➤</span></div>
+      <div class="faq-answer">Entrance exams are held every 6 months. Students should check the website regularly for dates and fees.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">4) Can I use the Lab facilities after my class hours? Any hidden charges? <span>➤</span></div>
+      <div class="faq-answer">Yes, labs remain open till 9 PM during course days with no extra charges. After completion, lab usage is paid ($1000 if pre-opted, $1500 if later).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">5) How can I apply for the entrance exam? <span>➤</span></div>
+      <div class="faq-answer">Applications are accepted online or via paper forms at the centre. Students must choose their desired course while applying.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">6) Will there be any fees for the entrance exam? <span>➤</span></div>
+      <div class="faq-answer">Yes, entrance exam fees will be mentioned clearly on the application form.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">7) How to make the payment? <span>➤</span></div>
+      <div class="faq-answer">Payments can be made via cash, draft, or cheque at the institute. Online details like cheque/DD number and bank info must be entered. After acceptance, acknowledgement is mailed with exam details.</div>
+    </div>
+
+  </div>
+
+  <script>
+    // Accordion Toggle
+    const questions = document.querySelectorAll(".faq-question");
+    questions.forEach(q => {
+      q.addEventListener("click", () => {
+        const answer = q.nextElementSibling;
+        const icon = q.querySelector("span");
+        answer.classList.toggle("open");
+        icon.classList.toggle("rotate");
+      });
+    });
+
+    // Search Filter
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("keyup", function() {
+      const filter = this.value.toLowerCase();
+      const faqItems = document.querySelectorAll(".faq-item");
+
+      faqItems.forEach(item => {
+        const questionText = item.querySelector(".faq-question").textContent.toLowerCase();
+        if (questionText.includes(filter)) {
+          item.style.display = "";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

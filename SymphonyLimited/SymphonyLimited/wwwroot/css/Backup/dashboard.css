@@ -1,0 +1,703 @@
+/* Importing Google Fonts and Boxicons */
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap";
+
+@import "https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css";
+
+/* Global style settings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a192f, #1e3a8a, #3b82f6);
+    display: flex;
+    flex-direction: column;
+    color: #e2e8f0;
+}
+/* Sidebar container styling */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101d;
+    padding: 6px 14px;
+    z-index: 99;
+    transition: all 0.5s ease;
+}
+
+.sidebar .logo-details {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        position: relative;
+}
+
+h1 {
+    color: #60a5fa;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 2.3rem;
+    font-weight: 700;
+}
+
+.sidebar .logo-details .icon {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+.logo-details a {
+    text-decoration: none;
+}
+.dropdown{
+    position: absolute !important;
+}
+.sidebar .logo-details .logo_name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar .logo-details #btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 23px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+/* General icon styling */
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+}
+
+/* Sidebar navigation list styling */
+.sidebar .nav_list {
+    height: calc(100% - 140px);
+}
+
+/* Scrollbar styles for sidebar */
+.sidebar .scroll {
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+    .sidebar .scroll::-webkit-scrollbar {
+        width: 8px;
+        background: #262440;
+        border-radius: 5px;
+    }
+
+    .sidebar .scroll::-webkit-scrollbar-thumb {
+        background: #262440;
+        /* Scrollbar thumb color */
+        border-radius: 5px;
+    }
+
+    .sidebar .scroll::-webkit-scrollbar-track {
+        background: #171526;
+        border-radius: 5px;
+    }
+
+/* Sidebar navigation item styling */
+.sidebar li {
+    position: relative;
+    margin: 8px 8px 8px 0;
+    list-style: none;
+}
+
+    .sidebar li .tooltip {
+        position: absolute;
+        top: -20px;
+        left: calc(100% + 15px);
+        z-index: 3;
+        background: linear-gradient(135deg,  #203a43, #2c5364);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: 400;
+        opacity: 0;
+        /* Hidden by default */
+        pointer-events: none;
+        transition: 0s;
+        color:#fff;
+    }
+
+    .sidebar li:hover .tooltip {
+        opacity: 1;
+        pointer-events: auto;
+        transition: all 0.4s ease;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Link styling within sidebar items */
+    .sidebar li a {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        border-radius: 12px;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        background: #11101d;
+    }
+
+        .sidebar li a:hover {
+            background: #1d1b31;
+        }
+
+            /* Link text and icon hover effects */
+            .sidebar li a:hover .links_name {
+                transition: all 0.5s ease;
+            }
+
+            .sidebar li a:hover i {
+                transition: all 0.5s ease;
+            }
+
+        /* Link text styling */
+        .sidebar li a .links_name {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.4s;
+        }
+
+    /* Icon styling within sidebar items */
+    .sidebar li i {
+        height: 50px;
+        line-height: 50px;
+        font-size: 18px;
+        border-radius: 12px;
+    }
+
+    /* Profile details styling */
+    .sidebar li .profile-details {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .sidebar li img {
+        height: 45px;
+        width: 45px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-right: 10px;
+    }
+
+/* Sidebar input (search) styling */
+.sidebar input {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+    outline: none;
+    height: 50px;
+    width: 50px;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+    background: #1d1b31;
+}
+
+p {
+    text-align: center;
+    max-width: 650px;
+    margin: 25px auto;
+    color: #cbd5e1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Expanded sidebar styles */
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar ul{
+    padding-left:0px !important;
+}
+    .sidebar.open .logo-details .icon {
+        opacity: 1;
+    }
+
+    .sidebar.open .logo-details .logo_name {
+        opacity: 1;
+    }
+
+    .sidebar.open .logo-details #btn {
+        text-align: right;
+    }
+
+    .sidebar.open li .tooltip {
+        display: none;
+    }
+
+    .sidebar.open li a .links_name {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .sidebar.open ~ .home-section {
+/*        left: 250px;
+        width: calc(100% - 250px);
+
+*/
+    }
+
+/* Main content (home section) styling */
+/*.home-section {
+    position: relative;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+    .home-section .text {
+        display: inline-block;
+        color: #11101d;
+        font-size: 25px;
+        font-weight: 500;
+        margin: 18px;
+    }*/
+
+/*FAQ PAGE CSS */
+
+/*.title {
+    background: #29395d;
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin: 0px 0px;
+}
+*/
+
+hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    width: 70%;
+    margin: 40px auto;
+}
+
+.navbar {
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+    letter-spacing: 1px;
+}
+
+    .navbar .logo {
+        font-size: 20px;
+        font-weight: 600;
+        color: #f9fafb;
+        letter-spacing: 0.5px;
+    }
+
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #29395db1;
+    min-width: 180px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+    .dropdown a {
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+        font-size: 14px;
+        color: #f1f5f9;
+        transition: background 0.2s;
+    }
+
+        .dropdown a:hover {
+            background: #2c5364;
+        }
+
+    /* show when active */
+    .dropdown.active {
+        display: block;
+    }
+
+/*.container {
+    width: 90%;
+    max-width: 1800px;
+    margin: 35px auto;
+    padding: 20px;
+    background: linear-gradient(145deg, #243b55, #141e30);
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    color: #e8ecf2;
+}
+*/
+/* Row — acts as a flexbox wrapper */
+/*.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+*/
+/* Column — flexible grid */
+/*.col,
+.faq {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #dfe6ef;
+    text-align: center;
+}
+*/
+    /* Optional: make text or headings pop */
+/*    .col h3 {
+        color: #cfd8e5;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+*/
+/* Responsive tweak */
+/*@media (max-width: 768px) {
+    .col {
+        flex: 100%;
+    }
+}
+
+h2 {
+    margin: 0;
+    color: #38bdf8;
+    margin-bottom: 15px;
+    text-decoration: underline;
+}
+
+form {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+    form input,
+    form textarea {
+        width: 90%;
+        margin: 10px auto;
+        display: block;
+        padding: 12px 14px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+transition: all 0.3s ease;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4);
+    }*/
+
+        /*form input:focus,
+        form textarea:focus {
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            box-shadow: 0 0 12px #38bdf8, inset 0 2px 8px rgba(0, 0, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+    form textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    form button {
+        margin-top: 12px;
+        padding: 12px 20px;
+        border-radius: 10px;
+        border: none;
+        background: linear-gradient(90deg, #2563eb, #38bdf8);
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }*/
+
+        /*form button:hover {
+            background: linear-gradient(90deg, #507fff, #91b4ff);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(86, 139, 255, 0.6);
+        }*/
+/* Header */
+/*header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+    header h1 {
+        font-size: 2.5rem;
+        color: #38bdf8;
+        text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        animation: fadeInDown 1s ease;
+    }
+*/
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Search */
+/*.search-box {
+    max-width: 600px;
+    margin: 20px auto 30px;
+    display: flex;
+    padding: 0 15px;
+    position: relative;
+}
+
+    .search-box input {
+        flex: 1;
+        padding: 14px 18px;
+        border-radius: 30px;
+        border: none;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        outline: none;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+        .search-box input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px #38bdf8;
+            transform: scale(1.03);
+        }
+*/
+/* FAQ Container */
+/*.faq-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: fadeIn 1.2s ease;
+}
+*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/*
+.faq {
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.faq-question {
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    transition: background 0.3s;
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+    .faq-question:hover {
+        background: rgba(108, 122, 128, 0.15);
+    }*/
+
+/*    .faq-question span {
+        transition: transform 0.4s ease;
+    }
+
+.faq-answer {
+    line-height: 1.6;
+    font-size: 0.95rem;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    color: #ddd;
+    transition: all 0.4s ease;
+    max-height: 500px;
+    padding: 15px 18px;
+}*/
+
+    /* .faq.active .faq-answer {} */
+/*    .faq-answer.open {
+        max-height: 500px;
+        padding: 16px 22px;
+    }*/
+
+/*.faq-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+}*/
+
+/*    .faq-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
+    }
+*/
+
+
+.rotate {
+    transform: rotate(90deg);
+}
+/* Responsive */
+/*
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+        padding: 15px 18px;
+    }
+
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+}*/
+/*.edit-btn,
+.delete-btn {
+    margin-left: 5px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.edit-btn {
+    background: #facc15;
+    color: #111;
+}
+
+.delete-btn {
+    background: #ef4444;
+    color: #fff;
+}
+
+.edit-btn:hover {
+    background: #eab308;
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(250, 204, 21, 0.5);
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
+}*/
+
+/*Buttons */
+.btn {
+    border:none;
+    color: white;
+    padding: 16px 40px;
+    margin: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-create {
+    background-color: #1e3a8a; /* Royal Blue */
+}
+
+    .btn-create:hover {
+        background-color: #274cba;
+    }
+
+.btn-read {
+    background-color: #64748b; /* Cool Silver-Gray */
+}
+
+    .btn-read:hover {
+        background-color: #94a3b8;
+    }
+
+.btn-update {
+    background-color: #2563eb; /* Lighter Royal Blue */
+}
+
+    .btn-update:hover {
+        background-color: #3b82f6;
+    }
+
+.btn-delete {
+    background-color: #b91c1c; /* Deep Red accent */
+}
+
+.btn-delete:hover {
+        background-color: #dc2626;
+}

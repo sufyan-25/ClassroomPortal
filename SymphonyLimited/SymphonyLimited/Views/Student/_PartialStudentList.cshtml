@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Student>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-danger">Nothing Found</div>
+}
+else
+{
+    <!-- Table -->
+    <div class="table-responsive mb-4">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Picture</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var index = 1;
+                }
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@x.StudentID</td>
+                        <td>@x.Name</td>
+                        <td>@x.Email</td>
+                        <td>@x.Phone</td>
+                        <td>@x.Address</td>
+                        <td>
+                            @if (!String.IsNullOrEmpty(x.ThumbPic))
+                            {
+                                <img src="data:image/jpeg;base64,@x.ThumbPic" alt="Student Image" style="width:50px; height:50px;border:0px;border-radius:50px" />
+                            }
+                            else
+                            {
+                                <img src="~/img/no_img.jpg" alt="No Image" style="width:150px; height:150px;" />
+                            }
+                        </td>
+                        <td>
+                            <button class="btn-action" id="edit">Edit</button>
+                            <button class="btn-action" id="delete">Delete</button>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<!-- Table -->
+<div class="table-responsive mb-4">
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>ST12345</td>
+                <td>AbuSufyan</td>
+                <td>abusufyan968@gmail.com</td>
+                <td>0334343453</td>
+                <td>Khadda Lyari Karachi</td>
+                <td>
+                    <img src="~/img/no_img.jpg" alt="No Image" style="width:100px; height:100px;" />
+                </td>
+                <td>
+                    <button class="btn-action" id="edit">Edit</button>
+                    <button class="btn-action" id="delete">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
