@@ -1,0 +1,221 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Course>
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">Data Loading...</div>
+}
+else
+{
+    <div class="content" id="mainContent">
+        <div class="container-fluid">
+            @foreach(var x in Model)
+            {
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card p-3">
+                            <h5 class="card-title">@x.Name</h5>
+                        <p class="card-text fs-4 fw-bold">@x.Topics.Count()</p>
+                            @foreach(var y in x.Topics)
+                            {
+                            <p class="text-muted mb-0">@y.Name</p>
+                            }
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+}
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-bold text-primary">Manage Courses</h3>
+        <button class="btn btn-success btn-sm">Add New Course</button>
+    </div>
+
+    <!-- Course Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Duration</th>
+                    <th>Fee</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dummy data -->
+                <tr>
+                    <td>Web Development</td>
+                    <td>Learn front-end and back-end web technologies.</td>
+                    <td>3 Months</td>
+                    <td>$300</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#topics1">Topics</button>
+                        <button class="btn btn-sm btn-warning">Edit</button>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="p-0">
+                        <!-- Topics Collapse -->
+                        <div class="collapse" id="topics1">
+                            <div class="p-3 bg-light">
+                                <h6 class="fw-bold text-secondary">Course Topics</h6>
+                                <table class="table table-sm table-bordered mb-2">
+                                    <thead class="table-secondary">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>HTML Basics</td>
+                                            <td>Introduction to HTML structure and elements.</td>
+                                            <td><img src="https://via.placeholder.com/60" class="img-fluid rounded" alt=""></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-warning">Edit</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>CSS Styling</td>
+                                            <td>Learn styling and layout techniques with CSS.</td>
+                                            <td><img src="https://via.placeholder.com/60" class="img-fluid rounded" alt=""></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-warning">Edit</button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-sm btn-success">Add New Topic</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-primary">Web Development</h2>
+        <p class="lead text-muted">Learn how to build dynamic, responsive websites using modern technologies.</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><strong>Duration:</strong> 3 Months</li>
+            <li class="list-inline-item"><strong>Fee:</strong> $300</li>
+        </ul>
+    </div>
+
+    <div class="row g-4">
+        <!-- Topic 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">HTML Basics</h5>
+                    <p class="card-text text-muted">Understand HTML structure, elements, and best practices for web markup.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">CSS Styling</h5>
+                    <p class="card-text text-muted">Explore layouts, colors, and responsive design using CSS.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">JavaScript Fundamentals</h5>
+                    <p class="card-text text-muted">Learn variables, functions, and event handling to make your sites interactive.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid p-0">
+    <!-- Course Cover Section -->
+    <div class="position-relative">
+        <img src="~/img/page-header.jpg" class="img-fluid w-100" alt="Course Cover" style="height: 400px; object-fit: cover;">
+        <div class="position-absolute top-50 start-50 translate-middle text-center text-white bg-dark bg-opacity-50 p-4 rounded">
+            <h1 class="fw-bold">Web Development</h1>
+            <p class="lead mb-2">Master front-end and back-end technologies for modern web applications</p>
+            <div>
+                <span class="badge bg-primary me-2">Duration: 3 Months</span>
+                <span class="badge bg-success">Fee: $300</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Course Description -->
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold text-primary">Course Overview</h3>
+        <p class="text-muted">This course is designed to help you gain a solid foundation in full-stack web development using the latest tools and frameworks.</p>
+    </div>
+
+    <!-- Course Topics -->
+    <div class="row g-4">
+        <!-- Topic 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="~/img/sym.jpg" class="card-img-top" alt="Topic Image">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">HTML & Structure</h5>
+                    <p class="card-text text-muted">Learn the basics of HTML tags, document structure, and semantic markup for professional web pages.</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 text-center">
+                    <button class="btn btn-primary w-100">Enroll Now</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Topic Image">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">CSS Styling</h5>
+                    <p class="card-text text-muted">Style and design responsive web layouts using CSS and modern grid/flexbox techniques.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Topic Image">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">JavaScript Essentials</h5>
+                    <p class="card-text text-muted">Build interactive websites with JavaScript fundamentals — variables, functions, and event handling.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Topic Image">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Backend with PHP & MySQL</h5>
+                    <p class="card-text text-muted">Understand server-side development, database integration, and API building for real-world apps.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

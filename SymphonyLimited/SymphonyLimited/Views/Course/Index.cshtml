@@ -1,0 +1,25 @@
+﻿@model SymphonyLimited.Models.Course
+@{
+    ViewData["Title"] = "Course Management";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="loadContainer">
+            @await Html.PartialAsync("_PartialCourseList")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // Load the controller of list (partial view)
+        $(document).ready(function () {
+            try{
+            $(".loadContainer").load("/Course/List");
+            }catch(err){
+                console.log(err);
+            }
+         });
+    </script>
+}

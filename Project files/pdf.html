@@ -2,11 +2,11 @@
 
 <div id="result">
   <h2>Result</h2>
-  <p>Student Name: <span id="name">Ali Khan</span></p>
-  <p>Roll No: SYM/ENT/2025/0123</p>
-  <p>Marks: 78 / 100</p>
-  <p>Class: With Basics</p>
-  <p>Course Fee: $6000</p>
+  <p class="para">Student Name: <span id="name">Ali Khan</span></p>
+  <p class="para">Roll No: SYM/ENT/2025/0123</p>
+  <p class="para">Marks: 78 / 100</p>
+  <p class="para">Class: With Basics</p>
+  <p class="para">Course Fee: $6000</p>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
@@ -14,6 +14,16 @@
   let name = document.getElementById("name");
   document.getElementById("download").addEventListener("click", () => {
     const element = document.getElementById("result");
-    html2pdf().from(element).save(name.textContent+"'s Result.pdf");
+    html2pdf()
+      .from(element)
+      .save(name.textContent + "'s Result.pdf");
+  });
+
+  let para = document.querySelectorAll(".para");
+  para.forEach((p) => {
+    p.addEventListener("click", function (e) {
+      para.forEach(x=>x.style.backgroundColor="");
+      this.style.backgroundColor = "red";
+    });
   });
 </script>

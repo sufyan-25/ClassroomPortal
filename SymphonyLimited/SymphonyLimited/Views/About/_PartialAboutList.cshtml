@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<SymphonyLimited.Models.About>
 @if (Model == null || !Model.Any())
 {
-    <div class="alert alert-danger">Nothing Found</div>
+    <div class="alert alert-warning">Data Loading....</div>
 }
 else
 {
+
     <div class="container py-4">
         @foreach (var x in Model)
         {
@@ -12,7 +13,7 @@ else
                 <div id="findData" class="col-md-4">
                     @if (!String.IsNullOrEmpty(x.thumb))
                     {
-                        <img id="editImg" src="data:image/jpeg;base64,@x.thumb"
+                        <img src="data:image/jpeg;base64,@x.thumb"
                              alt="About Image"
                              class="img-fluid rounded">
                     }
@@ -24,7 +25,8 @@ else
                     }
                 </div>
                 <div class="col-md-8">
-                    <input type="text" value="@x.AboutID" id="FID" hidden/>
+                    <input type="text" id="editImg" value="@x.thumb" hidden>
+                    <input type="text" value="@x.AboutID" id="FID" hidden />
                     <h4>@x.title</h4>
                     <p>@x.desc</p>
                     <a id="edit" class="btn btn-primary btn-sm">Edit</a>

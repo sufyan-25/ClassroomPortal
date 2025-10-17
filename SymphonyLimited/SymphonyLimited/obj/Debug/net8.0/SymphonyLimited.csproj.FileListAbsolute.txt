@@ -243,6 +243,7 @@ C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\n
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.RazorAssemblyInfo.cache
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.RazorAssemblyInfo.cs
+C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.sourcelink.json
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -255,10 +256,10 @@ C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\n
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\Symphony.4C8CE65A.Up2Date
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.dll
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\refint\SymphonyLimited.dll
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.pdb
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\SymphonyLimited.genruntimeconfig.cache
 C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\ref\SymphonyLimited.dll
-C:\Users\HP\Desktop\Project Symphony\SymphonyLimited\SymphonyLimited\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

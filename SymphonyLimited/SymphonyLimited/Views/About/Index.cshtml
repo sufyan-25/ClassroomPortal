@@ -3,65 +3,75 @@
 @{
     ViewData["Title"] = "About Section";
 }
-
-
 <div class="content">
-    <div class="container-fluid p-4 ">
-        <div class="text-center">
-        <button class="btn btn-primary btn-sm" id="pleaseShow">Show / Hide Form</button>
-
-        </div>
-        <!-- About Section -->
-        <div id="modall" class="row g-3 p-4 border rounded" style="background-color:#f8f9fa;display:none;">
-            <h4 class="text-primary mb-3">About Section</h4>
-            <div id="result"></div>
-
-            <!-- Error Handling -->
-            @if (TempData["Error"] != null)
-            {
-                <div class="alert alert-danger">@TempData["Error"]</div>
-            }
-            @if (TempData["Success"] != null)
-            {
-                <div class="alert alert-success">@TempData["Success"]</div>
-            }
-
-            <form asp-action="Create" asp-controller="About" id="form" enctype="multipart/form-data">
-                @Html.AntiForgeryToken()
-                <div class="mb-3">
-                    <label asp-for="title" class="form-label fw-semibold"></label>
-                    <input asp-for="title" name="title" type="text" class="form-control" id="title" />
-                    <span asp-validation-for="title" class="text-danger"></span>
+    <!-- Error Handling -->
+    <div class="container-fluid p-4">
+        <div id="result"></div>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+        <div class="row g-3 mb-4 p-4 border rounded" style="background-color:#f8f9fa;">
+            <div class="tab-pane " id="faq" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-primary m-0">Manage About Details</h4>
+                    <button class="btn btn-success btn-md" onclick="openModal()">Add More Details</button>
+                    <a asp-controller="Home" asp-action="About" class="btn btn-primary btn-md">Go to About Page</a>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="desc" class="form-label fw-semibold">Description</label>
-                    <div class="d-flex">
-
-                        <textarea asp-for="desc" name="desc" class="form-control" id="desc" rows="2"></textarea>
-                        <img src="~/img/no_img.jpg"
-                             alt="Current About Image"
-                             class="border-0 mx-3" style="width:150px;">
+                <div class="loadContainer">
+                    <div id="spinnerLoader">
+                        <div class="spinner"></div>
+                        <p>Loading, please wait...</p>
                     </div>
-                    <span asp-validation-for="desc" class="text-danger"></span>
+                    @await Html.PartialAsync("_PartialAboutList", Model)
                 </div>
-                <div class="mb-3">
-                    <label asp-for="ImageFile" for="image" class="form-label"></label>
-                    <input asp-for="ImageFile" type="file" id="img" name="ImageFile" class="form-control">
-                    <span asp-validation-for="ImageFile" class="text-danger"></span>
-                </div>
-                <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
-                <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
-                <button type="reset" id="clear" class="btn btn-secondary px-4">Clear</button>
-            </form>
-        </div>
-        <div class="row g-3 p-4 border rounded" style="background-color:#f8f9fa;">
-            <div class="loadContainer">
-                <div id="spinnerLoader">
-                    <div class="spinner"></div>
-                    <p>Loading, please wait...</p>
-                </div>
-                @await Html.PartialAsync("_PartialAboutList", Model)
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Section -->
+<div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add About Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" asp-controller="About" id="form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label asp-for="title" class="form-label fw-semibold"></label>
+                        <input asp-for="title" name="title" type="text" class="form-control" id="title" />
+                        <span asp-validation-for="title" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="desc" class="form-label fw-semibold">Description</label>
+                        <div class="d-flex">
+
+                            <textarea asp-for="desc" name="desc" class="form-control" id="desc" rows="2"></textarea>
+                            <img src="~/img/no_img.jpg"
+                                 alt="Current About Image"
+                                 class="border-0 mx-3" style="width:150px;" id="imagePreview">
+                        </div>
+                        <span asp-validation-for="desc" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" for="image" class="form-label"></label>
+                        <input hidden type="text" id="oldimg" name="oldImage" class="form-control">
+                        <input asp-for="ImageFile" type="file" onchange="PreviewImage(event)" id="img" name="ImageFile" class="form-control">
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
+                    <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
+                    <button type="reset" id="clear" class="btn btn-secondary px-4">Clear</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -84,10 +94,18 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        $("#pleaseShow").on("click",function(){
-            $("#modall").toggle();
-        })
-        // Load the controller of list (partial view)
+        // Declare variables for data posting
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        const modal = new bootstrap.Modal(document.getElementById('openModal'));
+        let id;
+
+        function openModal() {
+          modal.show();
+          $("#update").hide();
+          $("#save").show();
+        }
+
+        // Load the controller of list (partial view) ///////////////////////////////////
         $(document).ready(function () {
             try{
             $(".loadContainer").load("/About/List");
@@ -96,66 +114,50 @@
             }
         });
 
-        // Declare variables for data posting
-        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        let id;
-
-         // Edit code for post data
-        function Manage(event,id,action){
-            event.preventDefault();
-            try{
-            let formData = new FormData($("#form")[0]);
-
-            $.ajax({
-                url:`/About/${action}/${id}`,
-                type:'POST',
-                data: formData,
-                contentType:false,
-                processData:false,
-                success: function(res){
-                    if (res.success) {
-                        $("#result").html(`<div class="alert alert-success">${res.message}</div>`);
-                    $(".loadContainer").load("/About/List");                  
-                        } else {
-                            let html = "<ul class='text-danger'>";
-                            res.errors.forEach(e => html += `<li>${e}</li>`);
-                            html += "</ul>";
-                            $("#messageBox").html(html);
-                        }
-                        },
-                error: function () {
-                    $("#messageBox").html(`<div class="alert alert-danger">Server error</div>`);
+        //Image Preview //////////////////////////////////////////////////////////////////
+        function PreviewImage(e){
+            let file = e.target.files[0];
+            if(file){
+                let reader = new FileReader();
+                let imgPrev = document.getElementById("imagePreview");
+                reader.onload = function(x){
+                    imgPrev.src = x.target.result;
                 }
-                });
-            }catch(err){
-                console.log(err+" Failed to Post Data "+action);
+                reader.readAsDataURL(file);
             }
         }
-        // Edit get value
+
+        // Edit get value //////////////////////////////////////////////////
         $(document).on("click","#edit",function(){
+            modal.show();
             id = $(this).closest("div").find("#FID").val();
             let oldtitle = $(this).closest("div").find("h4").text();
             let oldDesc = $(this).closest("div").find("p").text();
-            let oldImg = $("#editImg").attr("src");
+            let oldImg = $(this).closest("div").find("#editImg").val();
             $("#title").val(oldtitle);
             $("#desc").val(oldDesc);
+            $("#oldimg").val(oldImg);
             $("#update").show();
             $("#save").hide();
             $("#modall").show();
+            $("#imagePreview").attr(`src`,`data:image/jpeg;base64,${oldImg}`);
          });
-         //Update Edit Value
-        $("#update").on("click",(e)=>{
-         if (!$('#title').val().trim() || !$("#desc").val().trim() || $('#img').get(0).files.length === 0) {
-            $("#result").html(`<div class="alert alert-danger">Fill all the input fields and select an image!</div>`)
-            return;
-        }else{
-         Manage(e,id,"Edit");
-         $("#save").show();
-         $("#update").hide();
-        }
 
+
+         //Update Edit Value ///////////////////////////////////////////////////////////
+        $("#update").on("click",(e)=>{
+             if (!$('#title').val().trim() || !$("#desc").val().trim()){
+                $("#result").html(`<div class="alert alert-danger">Fill all the input fields and select an image!</div>`)
+                return;
+            }else{
+             Manage(e,id,"Edit");
+             $("#save").show();
+             $("#update").hide();
+             modal.hide();
+            }
         });
-        //Delete Branches
+
+        //Delete Data ///////////////////////////////////////////////////////////////
         $(document).on("click","#delete",function(){
             id = $(this).closest("div").find("#FID").val();
             console.log(id);
@@ -168,6 +170,40 @@
         function closeModal(){
             deleteModal.hide();
         }
-    </script>
 
+
+         // Update Data through AJAX ////////////////////////////////////////////////////
+        function Manage(event,id,action){
+            event.preventDefault();
+
+            try{
+                let formData = new FormData($("#form")[0]);
+
+                $.ajax({
+                    url:`/About/${action}/${id}`,
+                    type:'POST',
+                    data: formData,
+                    contentType:false,
+                    processData:false,
+                    success: function(res){
+                        if (res.success) {
+                            $("#result").html(`<div class="alert alert-success">${res.message}</div>`);
+                            $(".loadContainer").load("/About/List");
+                        } else {
+                                let html = "<ul class='text-danger'>";
+                                res.message.forEach(e => html += `<li>${e}</li>`);
+                                html += "</ul>";
+                                $("#result").html(html);
+                        }
+                    },
+                    error: function () {
+                        $("#result").html(`<div class="alert alert-danger">Server error</div>`);
+                    }
+                });
+            }catch(err){
+                console.log(err+" Failed to Post Data "+action);
+            }
+        }
+
+    </script>
 }

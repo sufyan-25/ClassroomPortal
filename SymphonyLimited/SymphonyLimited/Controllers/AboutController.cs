@@ -28,7 +28,7 @@ namespace SymphonyLimited.Controllers
             return PartialView("_PartialAboutList", about);
         }
 
-        //Create Function////////////////////
+        //Create Function///////////////////////////////////////
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AboutView av)
@@ -69,7 +69,7 @@ namespace SymphonyLimited.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> Edit(int id, string title, string desc, IFormFile ImageFile)
+        public async Task<JsonResult> Edit(int id, string title, string desc, IFormFile? ImageFile)
         {
             try
             {
@@ -81,21 +81,18 @@ namespace SymphonyLimited.Controllers
                 if (id == 0)
                     return Json(new { success = false, message = "Id is null" });
 
-                if (ImageFile == null)
-                    return Json(new { success = false, message = "Image file is null" });
-
-                var (base64, thumb) = await ProcessingImage(ImageFile);
                 var about = await _context.Abouts.FirstOrDefaultAsync(x => x.AboutID == id);
-
-                if (about == null)
-                    return Json(new { success = false, message = "Record not found" });
+                if (ImageFile != null)
+                {
+                    //return Json(new { success = false, message = "Image file is null" });
+                    var (base64, thumb) = await ProcessingImage(ImageFile);
+                    about.base64 = base64;
+                    about.thumb = thumb;
+                }
 
                 about.title = title;
                 about.desc = desc;
-                about.base64=base64;
-                about.thumb=thumb;
 
-                _context.Abouts.Update(about);
                 await _context.SaveChangesAsync();
 
                 return Json(new { success = true, message = "Data Updated" });
@@ -105,7 +102,7 @@ namespace SymphonyLimited.Controllers
                 return Json(new { success = false, message = "Error happen" });
             }
         }
-        [HttpPost,ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public JsonResult Delete(int id)
         {
             if (id == 0)
@@ -117,6 +114,8 @@ namespace SymphonyLimited.Controllers
             _context.SaveChanges();
             return Json(new { success = true, message = "Deleted Successfully" });
         }
+
+
         private async Task<(String base64, String thumb)> ProcessingImage(IFormFile imageFile)
         {
             using var ms = new MemoryStream();

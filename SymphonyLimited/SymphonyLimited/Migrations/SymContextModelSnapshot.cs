@@ -117,6 +117,35 @@ namespace SymphonyLimited.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("SymphonyLimited.Models.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("Fee")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
+
             modelBuilder.Entity("SymphonyLimited.Models.Exam", b =>
                 {
                     b.Property<int>("Id")
@@ -249,6 +278,36 @@ namespace SymphonyLimited.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("SymphonyLimited.Models.Topic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseID");
+
+                    b.ToTable("Topics");
+                });
+
             modelBuilder.Entity("SymphonyLimited.Models.Result", b =>
                 {
                     b.HasOne("SymphonyLimited.Models.Exam", "Exam")
@@ -266,6 +325,22 @@ namespace SymphonyLimited.Migrations
                     b.Navigation("Exam");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.Topic", b =>
+                {
+                    b.HasOne("SymphonyLimited.Models.Course", "Courses")
+                        .WithMany("Topics")
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.Course", b =>
+                {
+                    b.Navigation("Topics");
                 });
 
             modelBuilder.Entity("SymphonyLimited.Models.Exam", b =>
