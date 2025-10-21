@@ -1,4 +1,4 @@
-﻿@model SymphonyLimited.ViewModel.AboutView
+﻿@model SymphonyLimited.Models.About
 
 @{
     ViewData["Title"] = "About Section";
@@ -34,7 +34,6 @@
     </div>
 </div>
 
-<!-- About Section -->
 <div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -53,7 +52,6 @@
                     <div class="mb-3">
                         <label asp-for="desc" class="form-label fw-semibold">Description</label>
                         <div class="d-flex">
-
                             <textarea asp-for="desc" name="desc" class="form-control" id="desc" rows="2"></textarea>
                             <img src="~/img/no_img.jpg"
                                  alt="Current About Image"
@@ -62,10 +60,9 @@
                         <span asp-validation-for="desc" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="ImageFile" for="image" class="form-label"></label>
-                        <input hidden type="text" id="oldimg" name="oldImage" class="form-control">
-                        <input asp-for="ImageFile" type="file" onchange="PreviewImage(event)" id="img" name="ImageFile" class="form-control">
-                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        <input asp-for="GalleryID" type="text" id="GID" name="GalleryID" hidden/>
+                        <span asp-validation-for="GalleryID" class="text-danger"></span>
+                        <button id="loadGallery" type="button" class="btn btn-warning px-4">Select Image</button>
                     </div>
                     <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
                     <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
@@ -75,6 +72,26 @@
         </div>
     </div>
 </div>
+
+            <!-- Modal For Gallery -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Select Image</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="ImageSelector">
+                <!-- Partial Page Load Here-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="imgSelect">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Modal For Delete -->
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -97,52 +114,68 @@
         // Declare variables for data posting
         const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         const modal = new bootstrap.Modal(document.getElementById('openModal'));
+        const imgModal = new bootstrap.Modal(document.getElementById('imageModal'));
         let id;
+        let src;
 
+        // Modal Functions for pop up
         function openModal() {
           modal.show();
           $("#update").hide();
           $("#save").show();
+        }
+        function closeModal(){
+            deleteModal.hide();
         }
 
         // Load the controller of list (partial view) ///////////////////////////////////
         $(document).ready(function () {
             try{
             $(".loadContainer").load("/About/List");
+            $("#ImageSelector").load("/Gallery/SelectImage");
             }catch(err){
                 console.log(err);
             }
         });
 
-        //Image Preview //////////////////////////////////////////////////////////////////
-        function PreviewImage(e){
-            let file = e.target.files[0];
-            if(file){
-                let reader = new FileReader();
-                let imgPrev = document.getElementById("imagePreview");
-                reader.onload = function(x){
-                    imgPrev.src = x.target.result;
-                }
-                reader.readAsDataURL(file);
+        $(document).on("click","#loadGallery",function(){
+            $("#ImageSelector").load("/Gallery/SelectImage");
+            imgModal.show();
+        });
+
+
+        //Image Capture and Preview //////////////////////////////////////////////////////////////////
+        $(document).on("click","#imgSelect",function(){
+            let img = $(".img-check:checked");
+            if(img.length>0){
+                img.each(function(){
+                console.log($(this).val());
+                let value = $(this).val();
+                src = $(this).closest("label").find("img").attr("src");
+                $("#imagePreview").attr("src",src);
+                $("#GID").val(value);
+                imgModal.hide();
+            });
+            }else{
+                $("#result").html("<div class='alert alert-danger'>No Image Selected</div>");
             }
-        }
+        });
 
         // Edit get value //////////////////////////////////////////////////
         $(document).on("click","#edit",function(){
             modal.show();
-            id = $(this).closest("div").find("#FID").val();
-            let oldtitle = $(this).closest("div").find("h4").text();
-            let oldDesc = $(this).closest("div").find("p").text();
-            let oldImg = $(this).closest("div").find("#editImg").val();
+            id = $(this).closest("div").find("#FID").val();                 //Get ID
+            let oldtitle = $(this).closest("div").find("h4").text();        //Get Name/Title
+            let oldDesc = $(this).closest("div").find("p").text();          //Get Description
+            let GID = $(this).closest("div").find("#getGid").val();         //Get Image ID
+            let oldImg = $(this).closest(".row").find("img").attr("src");   //Get Image ID
             $("#title").val(oldtitle);
             $("#desc").val(oldDesc);
-            $("#oldimg").val(oldImg);
+            $("#GID").val(GID);
+            $("#imagePreview").attr("src",oldImg);
             $("#update").show();
             $("#save").hide();
-            $("#modall").show();
-            $("#imagePreview").attr(`src`,`data:image/jpeg;base64,${oldImg}`);
          });
-
 
          //Update Edit Value ///////////////////////////////////////////////////////////
         $("#update").on("click",(e)=>{
@@ -151,6 +184,7 @@
                 return;
             }else{
              Manage(e,id,"Edit");
+             console.log(id);
              $("#save").show();
              $("#update").hide();
              modal.hide();
@@ -160,24 +194,21 @@
         //Delete Data ///////////////////////////////////////////////////////////////
         $(document).on("click","#delete",function(){
             id = $(this).closest("div").find("#FID").val();
-            console.log(id);
             deleteModal.show();
         });
         $("#confirmedDelete").on("click",function(e){
-            Manage(e,id,"Delete","");
+            Manage(e,id,"Delete");
                         deleteModal.hide();
         });
-        function closeModal(){
-            deleteModal.hide();
-        }
-
 
          // Update Data through AJAX ////////////////////////////////////////////////////
         function Manage(event,id,action){
             event.preventDefault();
+            console.log("hit the ajax");
 
             try{
                 let formData = new FormData($("#form")[0]);
+                console.log(formData);
 
                 $.ajax({
                     url:`/About/${action}/${id}`,
@@ -196,14 +227,13 @@
                                 $("#result").html(html);
                         }
                     },
-                    error: function () {
-                        $("#result").html(`<div class="alert alert-danger">Server error</div>`);
+                    error: function (res) {
+                        $("#result").html(`<div class="alert alert-danger">${res.message}Server error</div>`);
                     }
                 });
             }catch(err){
                 console.log(err+" Failed to Post Data "+action);
             }
         }
-
     </script>
 }

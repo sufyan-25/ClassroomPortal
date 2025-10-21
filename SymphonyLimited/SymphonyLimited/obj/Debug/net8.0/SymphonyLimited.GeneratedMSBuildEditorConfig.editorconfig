@@ -68,6 +68,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXF9QYXJ0aWFsQ291cnNlTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/Course/_PartialTopicForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXF9QYXJ0aWFsVG9waWNGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/DetailCourse/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlsQ291cnNlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,6 +90,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/FAQ/_PartialFaqList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRkFRXF9QYXJ0aWFsRmFxTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/Gallery/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsbGVyeVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/Gallery/_PartialGallery.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsbGVyeVxfUGFydGlhbEdhbGxlcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/Gallery/_PartialSelectImage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FsbGVyeVxfUGFydGlhbFNlbGVjdEltYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/HP/Desktop/Project Symphony/SymphonyLimited/SymphonyLimited/Views/Home/About.cshtml]

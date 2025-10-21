@@ -1,0 +1,17 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Gallery>
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">Data Loading</div>
+}
+else
+{
+    <div class="modal-body">
+        @foreach (var x in Model)
+        {
+            <label class="position-relative">
+                <input type="radio" name="imageSelect" value="@x.Id" class="form-check-input position-absolute top-0 end-0 m-2 img-check">
+                <img src="data:image/jpeg;base64,@x.Thumb64" class="border rounded" width="150" height="150">
+            </label>
+        }
+    </div>
+}

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace SymphonyLimited.Models
 {
@@ -6,14 +7,16 @@ namespace SymphonyLimited.Models
     {
         [Key]
         public int AboutID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Title Required"), Display(Name = "Add Title")]
+        [StringLength(maximumLength: 20, MinimumLength = 5)]
         public string title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Description Required"), Display(Name = "Add Description")]
         public string desc { get; set; }
-        [Required]
-        public string base64 { get; set; }
-        [Required]
-        public string thumb { get; set; }
+        [Required(ErrorMessage ="Select the image")]
+        [Display(Name = "Select Image")]
+        public int GalleryID { get; set; }
+        [ValidateNever]
+        public virtual Gallery? Gallery { get; set; }
     }
     public class FAQ
     {

@@ -5,32 +5,6 @@
 }
 else
 {
-    <div class="content" id="mainContent">
-        <div class="container-fluid">
-            @foreach(var x in Model)
-            {
-            <div class="row g-3 mb-4">
-                <div class="col-md-4">
-                    <div class="card p-3">
-                            <h5 class="card-title">@x.Name</h5>
-                        <p class="card-text fs-4 fw-bold">@x.Topics.Count()</p>
-                            @foreach(var y in x.Topics)
-                            {
-                            <p class="text-muted mb-0">@y.Name</p>
-                            }
-                    </div>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-}
-<div class="container my-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-bold text-primary">Manage Courses</h3>
-        <button class="btn btn-success btn-sm">Add New Course</button>
-    </div>
-
     <!-- Course Table -->
     <div class="table-responsive">
         <table class="table table-striped table-bordered align-middle">
@@ -44,108 +18,56 @@ else
                 </tr>
             </thead>
             <tbody>
-                <!-- Dummy data -->
-                <tr>
-                    <td>Web Development</td>
-                    <td>Learn front-end and back-end web technologies.</td>
-                    <td>3 Months</td>
-                    <td>$300</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#topics1">Topics</button>
-                        <button class="btn btn-sm btn-warning">Edit</button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="p-0">
-                        <!-- Topics Collapse -->
-                        <div class="collapse" id="topics1">
-                            <div class="p-3 bg-light">
-                                <h6 class="fw-bold text-secondary">Course Topics</h6>
-                                <table class="table table-sm table-bordered mb-2">
-                                    <thead class="table-secondary">
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Image</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>HTML Basics</td>
-                                            <td>Introduction to HTML structure and elements.</td>
-                                            <td><img src="https://via.placeholder.com/60" class="img-fluid rounded" alt=""></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-warning">Edit</button>
-                                                <button class="btn btn-sm btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>CSS Styling</td>
-                                            <td>Learn styling and layout techniques with CSS.</td>
-                                            <td><img src="https://via.placeholder.com/60" class="img-fluid rounded" alt=""></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-warning">Edit</button>
-                                                <button class="btn btn-sm btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button class="btn btn-sm btn-success">Add New Topic</button>
+                @{var index = 0;}
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@x.Name</td>
+                        <td class="text-truncate" style="max-width: 250px;">@x.Description</td>
+                        <td>@x.Duration</td>
+                        <td>@x.Fee</td>
+                        <td>
+                            <input type="text" id="FID" value="@x.Id" hidden />
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="@(index>=0 ? $"#topic{index}":"")">Topics</button>
+                            <button class="btn btn-sm btn-warning" id="edit">Edit</button>
+                            <button class="btn btn-sm btn-danger" id="delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="p-0">
+                            <!-- Topics Collapse -->
+                            <div class="collapse" id="@(index >= 0 ? $"topic{index}" : "")">
+                                <div class="p-3 bg-light">
+                                    <h6 class="fw-bold text-secondary">Course Topics</h6>
+                                        <div class="row g-4">
+                                    @foreach (var y in x.Topics)
+                                    {
+                                            <div class="col-md-4 col-lg-3">
+                                                <div class="card h-100 shadow-sm border-0">
+                                                    <img src="~/img/sym.jpg" class="card-img-top" style="width:150px" alt="Topic Image">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-primary">@y.Name</h5>
+                                                        <p class="card-text text-muted text-truncate">@y.Description</p>
+                                                    </div>
+                                                    <div class="card-footer bg-transparent border-0 text-center">
+                                                        <button class="btn btn-primary w-100">Enroll Now</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    }
+                                        </div>
+                                    <button class="btn btn-sm btn-success">Add New Topic</button>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                    index++;
+                }
             </tbody>
         </table>
     </div>
-</div>
-<div class="container my-5">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold text-primary">Web Development</h2>
-        <p class="lead text-muted">Learn how to build dynamic, responsive websites using modern technologies.</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><strong>Duration:</strong> 3 Months</li>
-            <li class="list-inline-item"><strong>Fee:</strong> $300</li>
-        </ul>
-    </div>
+}
 
-    <div class="row g-4">
-        <!-- Topic 1 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm border-0">
-                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">HTML Basics</h5>
-                    <p class="card-text text-muted">Understand HTML structure, elements, and best practices for web markup.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Topic 2 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm border-0">
-                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">CSS Styling</h5>
-                    <p class="card-text text-muted">Explore layouts, colors, and responsive design using CSS.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Topic 3 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm border-0">
-                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title text-primary">JavaScript Fundamentals</h5>
-                    <p class="card-text text-muted">Learn variables, functions, and event handling to make your sites interactive.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="container-fluid p-0">
     <!-- Course Cover Section -->
     <div class="position-relative">
@@ -181,7 +103,6 @@ else
                 <div class="card-footer bg-transparent border-0 text-center">
                     <button class="btn btn-primary w-100">Enroll Now</button>
                 </div>
-
             </div>
         </div>
 

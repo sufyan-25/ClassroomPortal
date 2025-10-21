@@ -17,7 +17,11 @@ namespace SymphonyLimited.Models
         [Required(ErrorMessage ="Description of course required"),Display(Name ="Course Description")]
         public string Description { get; set; }
         [ValidateNever]
-        public virtual ICollection<Topic>? Topics { get; set; } 
+        public virtual ICollection<Topic>? Topics { get; set; }
+        [Required(ErrorMessage ="Select the Image"),Display(Name ="Select Image")]
+        public int GalleryID { get; set; }
+        [ValidateNever]
+        public virtual Gallery? Gallery { get; set; }
     }
     public class Topic
     {
@@ -33,6 +37,9 @@ namespace SymphonyLimited.Models
 
         [Required(ErrorMessage ="Topic description required"),Display(Name ="Topic Description")]
         public string Description { get; set; }
-        public string Image {  get; set; }
+
+        public int GalleryID {  get; set; }
+        [ValidateNever]
+        public virtual Gallery? Gallery { get; set; }
     }
 }

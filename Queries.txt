@@ -52,3 +52,33 @@ INSERT INTO Students (StudentId, Name, Email, Phone, Address, Thumbpic) VALUES
 ('1000492339','Bushra Aslam','bushra.aslam1@example.com','+923001000049','4 Street, Sector 10, City','data:image/png;base64,FAKEBASE64STRING=='),
 ('1000502240','Sumaira Abbas','sumaira.abbas1@example.com','+923001000050','68 Street, Sector 11, City','data:image/png;base64,FAKEBASE64STRING==');
 
+About:-
+1. Our Mission
+To provide quality technical and academic education that prepares students for real-world challenges through hands-on learning, mentorship, and an environment that fosters innovation.
+
+2. Our Vision
+To become a leading institute recognized for excellence in education, research, and professional development — empowering students to shape a better future for themselves and their communities.
+
+3. Why Choose Us
+We focus on personalized attention, expert faculty, modern infrastructure, and practical exposure through industry-relevant projects and workshops. Our results and placement records speak for our dedication.
+
+4. Our Programs
+We offer a wide range of technical and professional courses designed to enhance student skills and employability. Each course is structured to balance theory, practical sessions, and individual mentoring.
+
+5. Admission Process
+Admission is based on an entrance examination conducted every six months. Once qualified, students can select their preferred course and complete registration through our online or in-person admission desk.
+
+6. Faculty and Staff
+Our experienced faculty members are industry professionals and certified educators. They are committed to guiding students throughout their academic journey and beyond.
+
+7. Infrastructure and Facilities
+Our campus is equipped with well-maintained classrooms, modern computer labs, dedicated study zones, and high-speed internet facilities to support both academic and research activities.
+
+8. Student Support and Counselling
+We believe in nurturing students beyond academics. Our dedicated support team provides academic counselling, career guidance, and personal mentoring to help students make informed decisions.
+
+9. Industry Collaboration
+We maintain active partnerships with various industries and organizations to facilitate internships, workshops, and live project training for our students.
+
+10. Our Commitment
+We are committed to maintaining transparency, quality education, and continuous improvement in all aspects of our institute’s functioning.

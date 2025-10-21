@@ -9,12 +9,12 @@ namespace SymphonyLimited.Models
         [Key]
         public int AdminID { get; set; }
         public string Name { get; set; }
-        public string Username {  get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public string CellNo { get; set; }
 
     }
-    public class SymContext: DbContext
+    public class SymContext : DbContext
     {
         public SymContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,9 +30,14 @@ namespace SymphonyLimited.Models
                 .HasIndex(e => e.Email).IsUnique();
             modelBuilder.Entity<Student>()
                 .HasIndex(e => e.Phone).IsUnique();
+            modelBuilder.Entity<Topic>()
+                .HasOne(t => t.Gallery)
+                .WithMany(g => g.Topics)
+                .HasForeignKey(t => t.GalleryID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<Auth> Auths { get; set; }
-        public DbSet<FAQ> FAQs { get; set; } 
+        public DbSet<FAQ> FAQs { get; set; }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Student> Students { get; set; }
@@ -40,5 +45,6 @@ namespace SymphonyLimited.Models
         public DbSet<Result> Results { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
     }
 }

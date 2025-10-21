@@ -43,6 +43,10 @@ namespace SymphonyLimited.Models
         public int Fee { get; set; }
         [Required(ErrorMessage = "Description is requierd"), Display(Name = "Description")]
         public string Desc { get; set; }
+        [Required(ErrorMessage ="Select the Image"),Display(Name ="Select Image")]
+        public int GalleryID { get; set; }
+        [ValidateNever]
+        public virtual Gallery? Gallery { get; set; }
         public virtual ICollection<Result>? Results { get; set; }
     }
     public class Result

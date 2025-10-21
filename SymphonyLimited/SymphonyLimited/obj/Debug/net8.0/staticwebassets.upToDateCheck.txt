@@ -1,15 +1,18 @@
-wwwroot\css\Backup\dashboard.css
+wwwroot\css\Backup\dashboard1.css
+wwwroot\css\Backup\dashboard2.css
 wwwroot\css\Backup\modal.css
 wwwroot\css\dashboard.css
 wwwroot\css\modal.css
+wwwroot\css\newSide.css
 wwwroot\css\site.css
 wwwroot\css\style.css
 wwwroot\css\style.min.css
 wwwroot\favicon.ico
 wwwroot\img\about.jpg
-wwwroot\img\about_1 (2).png
-wwwroot\img\about_2 (2).png
+wwwroot\img\about_1.png
+wwwroot\img\about_2.png
 wwwroot\img\bg-image.jpg
+wwwroot\img\c-html.png
 wwwroot\img\courses-1.jpg
 wwwroot\img\courses-2.jpg
 wwwroot\img\courses-3.jpg
@@ -17,8 +20,10 @@ wwwroot\img\courses-4.jpg
 wwwroot\img\courses-5.jpg
 wwwroot\img\courses-6.jpg
 wwwroot\img\courses-80x80.jpg
-wwwroot\img\exam.png
+wwwroot\img\css.png
+wwwroot\img\exam (2).png
 wwwroot\img\feature.jpg
+wwwroot\img\git-version.png
 wwwroot\img\header.jpg
 wwwroot\img\no_img.jpg
 wwwroot\img\overlay-bottom.png
@@ -33,6 +38,7 @@ wwwroot\img\team-4.jpg
 wwwroot\img\testimonial-1.jpg
 wwwroot\img\testimonial-2.jpg
 wwwroot\js\main.js
+wwwroot\js\modal.js
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

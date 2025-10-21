@@ -22,8 +22,9 @@ namespace SymphonyLimited.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(LoginView lgv) {
-            if (!ModelState.IsValid)return View(lgv);
+        public async Task<IActionResult> Login(LoginView lgv)
+        {
+            if (!ModelState.IsValid) return View(lgv);
             if (lgv == null) return View(lgv);
             var auth = await _context.Auths.Where(x => x.Username == lgv.Username && x.Password == lgv.Password).FirstOrDefaultAsync();
             if (auth == null)
@@ -36,7 +37,7 @@ namespace SymphonyLimited.Controllers
                 new Claim(ClaimTypes.NameIdentifier, Convert.ToString(auth.AdminID)),
                 new Claim(ClaimTypes.Name, auth.Name),
             };
-            var identity = new ClaimsIdentity(claim,CookieAuthenticationDefaults.AuthenticationScheme);
+            var identity = new ClaimsIdentity(claim, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
@@ -53,8 +54,10 @@ namespace SymphonyLimited.Controllers
             return LocalRedirect("/");
         }
         [Authorize]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            var stCount = await _context.Students.Include(x => x.Results).GroupBy(s => s.Status).Select(g => new { Status = g.Key, Count = g.Count()}).ToListAsync();
+            ViewBag.StCount = stCount;
             return View();
         }
         public IActionResult Forbidden()

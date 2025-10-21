@@ -1,0 +1,168 @@
+﻿@model SymphonyLimited.ViewModel.GalleryView
+@{
+    ViewData["Title"] = "Gallery";
+}
+<div class="content">
+    <!-- Error Handling -->
+    <div class="container-fluid p-4">
+        <div id="result"></div>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>
+        }
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">@TempData["Success"]</div>
+        }
+        <div class="row g-3 mb-4 p-4 border rounded" style="background-color:#f8f9fa;">
+            <div class="tab-pane " id="faq" role="tabpanel">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-primary m-0">Manage Gallery</h4>
+                    <button class="btn btn-success btn-md" onclick="openModal()">Add Pictures</button>
+                </div>
+                <div class="loadContainer">
+                    <div id="spinnerLoader">
+                        <div class="spinner"></div>
+                        <p>Loading, please wait...</p>
+                    </div>
+                    @await Html.PartialAsync("_PartialGallery", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add Pictures</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" asp-controller="Gallery" id="form" enctype="multipart/form-data">
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label asp-for="AltText" class="form-label fw-semibold"></label>
+                        <input asp-for="AltText" name="title" type="text" class="form-control" id="data1" />
+                        <span asp-validation-for="AltText" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <img src="~/img/no_img.jpg"
+                                 alt="Current About Image"
+                                 class="border-0 mx-3" style="width:150px;" id="imagePreview">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" for="image" class="form-label"></label>
+                        <input hidden type="text" id="oldimg" name="oldImage" class="form-control">
+                        <input asp-for="ImageFile" type="file" onchange="PreviewImage(event)" id="dataImg" name="ImageFile" class="form-control">
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
+                    <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
+                    <button type="reset" id="clear" class="btn btn-secondary px-4">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Confirmed Delete?</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmedDelete">Yes</button>
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        // Declare variables for data posting
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        const modal = new bootstrap.Modal(document.getElementById('openModal'));
+        let id;
+
+        function openModal() {
+          modal.show();
+          $("#update").hide();
+          $("#save").show();
+        }
+        function closeModal(){
+            deleteModal.hide();
+        }
+
+        // Load the controller of list (partial view) ///////////////////////////////////
+        $(document).ready(function () {
+            try{
+            $(".loadContainer").load("/Gallery/List");
+            }catch(err){
+                console.log(err);
+            }
+        });
+
+        //Image Preview //////////////////////////////////////////////////////////////////
+        function PreviewImage(e){
+            let file = e.target.files[0];
+            if(file){
+                let reader = new FileReader();
+                let imgPrev = document.getElementById("imagePreview");
+                reader.onload = function(x){
+                    imgPrev.src = x.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        let selectedIds = [];
+        //Delete Data ///////////////////////////////////////////////////////////////
+        $(document).on("click","#delete",function(){
+            $(".img-check:checked").each(function(){
+                selectedIds.push($(this).val());
+            });
+            deleteModal.show();
+        });
+        $("#confirmedDelete").on("click",function(e){
+            Manage(e,selectedIds,"Delete");
+            deleteModal.hide();
+        });
+
+         // Update Data through AJAX ////////////////////////////////////////////////////
+        function Manage(event,data,action){
+            event.preventDefault();
+
+            try{
+                //for form
+                // let formData = new FormData($("#form")[0]);
+                $.ajax({
+                    url:`/Gallery/${action}`,
+                    type:'POST',
+                    data: {ids:selectedIds},
+                    traditional: true,
+                    success: function(res){
+                        if (res.success) {
+                            $("#result").html(`<div class="alert alert-success">${res.message}</div>`);
+                            $(".loadContainer").load("/Gallery/List");
+                        } else {
+                                $("#result").html(`<div class="alert alert-success">${res.message}</div>`);
+                        }
+                    },
+                    error: function () {
+                        $("#result").html(`<div class="alert alert-danger">Server error</div>`);
+                    }
+                });
+            }catch(err){
+                console.log(err+" Failed to Post Data "+action);
+            }
+        }
+    </script>
+}

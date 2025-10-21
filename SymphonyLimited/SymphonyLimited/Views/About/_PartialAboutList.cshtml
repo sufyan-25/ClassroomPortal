@@ -11,9 +11,9 @@ else
         {
             <div class="row mb-3 align-items-center border rounded p-3">
                 <div id="findData" class="col-md-4">
-                    @if (!String.IsNullOrEmpty(x.thumb))
+                    @if (!String.IsNullOrEmpty(x.Gallery.Thumb64))
                     {
-                        <img src="data:image/jpeg;base64,@x.thumb"
+                        <img src="data:image/jpeg;base64,@x.Gallery.Thumb64"
                              alt="About Image"
                              class="img-fluid rounded">
                     }
@@ -25,7 +25,7 @@ else
                     }
                 </div>
                 <div class="col-md-8">
-                    <input type="text" id="editImg" value="@x.thumb" hidden>
+                    <input type="text" id="getGid" value="@x.GalleryID" hidden>
                     <input type="text" value="@x.AboutID" id="FID" hidden />
                     <h4>@x.title</h4>
                     <p>@x.desc</p>

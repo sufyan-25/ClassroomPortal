@@ -29,23 +29,21 @@ namespace SymphonyLimited.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboutID"));
 
-                    b.Property<string>("base64")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GalleryID")
+                        .HasColumnType("int");
 
                     b.Property<string>("desc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("thumb")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("AboutID");
+
+                    b.HasIndex("GalleryID");
 
                     b.ToTable("Abouts");
                 });
@@ -137,11 +135,16 @@ namespace SymphonyLimited.Migrations
                     b.Property<int>("Fee")
                         .HasColumnType("int");
 
+                    b.Property<int>("GalleryID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GalleryID");
 
                     b.ToTable("Courses");
                 });
@@ -169,12 +172,17 @@ namespace SymphonyLimited.Migrations
                     b.Property<int>("Fee")
                         .HasColumnType("int");
 
+                    b.Property<int>("GalleryID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GalleryID");
 
                     b.ToTable("Exams");
                 });
@@ -198,6 +206,31 @@ namespace SymphonyLimited.Migrations
                     b.HasKey("FAQID");
 
                     b.ToTable("FAQs");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.Gallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AltText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageBs64")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Thumb64")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Galleries");
                 });
 
             modelBuilder.Entity("SymphonyLimited.Models.Result", b =>
@@ -293,9 +326,8 @@ namespace SymphonyLimited.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GalleryID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -305,7 +337,42 @@ namespace SymphonyLimited.Migrations
 
                     b.HasIndex("CourseID");
 
+                    b.HasIndex("GalleryID");
+
                     b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.About", b =>
+                {
+                    b.HasOne("SymphonyLimited.Models.Gallery", "Gallery")
+                        .WithMany("Abouts")
+                        .HasForeignKey("GalleryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gallery");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.Course", b =>
+                {
+                    b.HasOne("SymphonyLimited.Models.Gallery", "Gallery")
+                        .WithMany("Courses")
+                        .HasForeignKey("GalleryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gallery");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.Exam", b =>
+                {
+                    b.HasOne("SymphonyLimited.Models.Gallery", "Gallery")
+                        .WithMany("Exams")
+                        .HasForeignKey("GalleryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gallery");
                 });
 
             modelBuilder.Entity("SymphonyLimited.Models.Result", b =>
@@ -335,7 +402,15 @@ namespace SymphonyLimited.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SymphonyLimited.Models.Gallery", "Gallery")
+                        .WithMany("Topics")
+                        .HasForeignKey("GalleryID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Courses");
+
+                    b.Navigation("Gallery");
                 });
 
             modelBuilder.Entity("SymphonyLimited.Models.Course", b =>
@@ -346,6 +421,17 @@ namespace SymphonyLimited.Migrations
             modelBuilder.Entity("SymphonyLimited.Models.Exam", b =>
                 {
                     b.Navigation("Results");
+                });
+
+            modelBuilder.Entity("SymphonyLimited.Models.Gallery", b =>
+                {
+                    b.Navigation("Abouts");
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Exams");
+
+                    b.Navigation("Topics");
                 });
 
             modelBuilder.Entity("SymphonyLimited.Models.Student", b =>

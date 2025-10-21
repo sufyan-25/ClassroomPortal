@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SymphonyLimited.Models.Gallery>
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">Data Loading....</div>
+}
+else
+{
+    <div class="container mt-4">
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+            @foreach (var x in Model)
+            {
+                <div class="col position-relative text-center">
+                    <input type="checkbox" class="form-check-input position-absolute top-0 start-0 m-1 img-check" value="@x.Id">
+                    @if (!String.IsNullOrEmpty(x.Thumb64))
+                    {
+                        <img src="data:image/jpeg;base64,@x.Thumb64" class="img-fluid rounded shadow-sm" alt="@x.AltText"
+                             style="height:120px; width:100%; object-fit:cover;">
+                    }
+                    else
+                    {
+                        <img src="~/img/no_img.jpg" class="img-fluid rounded shadow-sm" alt="No Image"
+                             style="height:120px; width:100%; object-fit:cover;">
+                    }
+                </div>
+            }
+        </div>
+        <div class="text-center mt-3">
+            <button id="delete" class="btn btn-danger btn-sm">Delete Selected</button>
+        </div>
+    </div>
+}
