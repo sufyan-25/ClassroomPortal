@@ -16,13 +16,12 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="fw-bold text-warning">Manage Courses</h3>
             <div>
-                <button class="btn btn-success btn-sm" onclick="openModal('openModal')">Add New <strong>Course</strong></button>
-                <button class="btn btn-success btn-sm" onclick="openModal('otherModal')">Add New <strong>Topic</strong></button>
+                <button class="btn btn-success btn-sm" onclick="openModal(modal)">Add New <strong>Course</strong></button>
+                <button class="btn btn-success btn-sm" onclick="openModal(modal2)">Add New <strong>Topic</strong></button>
                 <a asp-action="Course" asp-controller="Home" class="btn btn-primary btn-md">Go To Courses Page</a>
             </div>
         </div>
         <div class="loadContainer">
-            @await Html.PartialAsync("_PartialCourseList")
         </div>
     </div>
 </div>
@@ -35,7 +34,7 @@
                 <h5 class="modal-title">Add Course</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form asp-action="Create" asp-controller="Course" id="form" enctype="multipart/form-data">
+            <form asp-action="Create" asp-controller="Course" id="form">
                 <div class="modal-body">
                     @Html.AntiForgeryToken()
                     <div class="mb-3">
@@ -45,15 +44,18 @@
                     </div>
                     <div class="mb-3">
                         <label asp-for="Description" class="form-label fw-semibold">Description</label>
-                        <textarea asp-for="Description" name="Description" class="form-control" id="Description" rows="2"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                        @*
                         <div class="d-flex">
                             <img src="~/img/no_img.jpg"
                                  alt="Current About Image"
-                                 class="border-0 mx-3" style="width:150px;" id="imagePreview">
-                        </div> 
-                        *@
+                                 class="border-0 mx-3 imagePreview" style="width:150px;">
+                            <textarea asp-for="Description" name="Description" class="form-control" id="Description" rows="2"></textarea>
+                        </div>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <input asp-for="GalleryID" type="text" class="GID" name="GalleryID" hidden />
+                        <span asp-validation-for="GalleryID" class="text-danger"></span>
+                        <button type="button" onclick="openModal(imgModal)" class="btn btn-warning px-4">Select Image</button>
                     </div>
                     <div class="mb-3">
                         <label asp-for="Duration" class="form-label fw-semibold"></label>
@@ -65,12 +67,6 @@
                         <input asp-for="Fee" name="Fee" type="text" class="form-control" id="Fee" />
                         <span asp-validation-for="Fee" class="text-danger"></span>
                     </div>
-                    @* <div class="mb-3">
-                        <label asp-for="ImageFile" for="image" class="form-label"></label>
-                        <input hidden type="text" id="oldimg" name="oldImage" class="form-control">
-                        <input asp-for="ImageFile" type="file" onchange="PreviewImage(event)" id="img" name="ImageFile" class="form-control">
-                        <span asp-validation-for="ImageFile" class="text-danger"></span>
-                    </div> *@
                     <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
                     <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
                     <button type="reset" id="clear" class="btn btn-secondary px-4">Clear</button>
@@ -80,6 +76,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="otherModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Add Course</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="formLoad">
+                @await Html.PartialAsync("_PartialTopicForm")
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal For Gallery -->
+<div class="modal fade" id="imageModal" tabindex="-3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Select Image</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="ImageSelector">
+                <!-- Partial Page Load Here-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="imgSelect">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal For Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -94,23 +122,41 @@
         </div>
     </div>
 </div>
-<div id="formLoad">
-    @await Html.PartialAsync("_PartialTopicForm")
-</div>
+
 <!-- End Form -->
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 @section Scripts {
-    <script src="~/js/modal.js"></script>
+    <script src="~/js/gallery.js"></script>
     <script>
         // Load the controller of list (partial view)
         $(document).ready(function () {
             try{
             $(".loadContainer").load("/Course/List");
+            $("#ImageSelector").load("/Gallery/SelectImage");
             }catch(err){
                 console.log(err);
             }
         });
+
+        //Varaible Declaratoins for External JS
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        modal = new bootstrap.Modal(document.getElementById('openModal'));
+        modal2 = new bootstrap.Modal(document.getElementById('otherModal'));
+        imgModal = new bootstrap.Modal(document.getElementById('imageModal')); //For Gallery Function
+        imgSelector = $("#ImageSelector");
+        // function openModal(m) {
+        //     if (m==modal2) {
+        //         $("#formLoad").load("/Course/Create");
+        //     }
+        //     m.show();
+        //     $("#update").hide();
+        //     $("#save").show();
+        // }
+        // function closeModal() {
+        //     deleteModal.hide();
+        // }
+
         let id;
          $(document).on("click","#edit",function(){
             modal.show();

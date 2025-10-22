@@ -22,7 +22,7 @@ namespace SymphonyLimited.Controllers
         }
         public async Task<IActionResult> List()
         {
-            var st = await _context.Students.ToListAsync();
+            var st = await _context.Students.OrderBy(x=>x.Name).ToListAsync();
             return PartialView("_PartialStudentList", st);
         }
 

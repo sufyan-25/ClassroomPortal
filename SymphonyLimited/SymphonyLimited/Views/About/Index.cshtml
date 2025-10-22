@@ -19,7 +19,7 @@
             <div class="tab-pane " id="faq" role="tabpanel">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-primary m-0">Manage About Details</h4>
-                    <button class="btn btn-success btn-md" onclick="openModal()">Add More Details</button>
+                    <button class="btn btn-success btn-md" onclick="openModal(modal)">Add More Details</button>
                     <a asp-controller="Home" asp-action="About" class="btn btn-primary btn-md">Go to About Page</a>
                 </div>
                 <div class="loadContainer">
@@ -62,7 +62,7 @@
                     <div class="mb-3">
                         <input asp-for="GalleryID" type="text" id="GID" name="GalleryID" hidden/>
                         <span asp-validation-for="GalleryID" class="text-danger"></span>
-                        <button id="loadGallery" type="button" class="btn btn-warning px-4">Select Image</button>
+                        <button id="" type="button" onclick="openModal(imgModal)" class="btn btn-warning px-4">Select Image</button>
                     </div>
                     <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
                     <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
@@ -72,7 +72,6 @@
         </div>
     </div>
 </div>
-
             <!-- Modal For Gallery -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -90,9 +89,7 @@
         </div>
     </div>
 </div>
-
             <!-- Modal For Delete -->
-
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -110,23 +107,15 @@
 @section Scripts {
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/js/gallery.js"></script>
     <script>
         // Declare variables for data posting
         const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        const modal = new bootstrap.Modal(document.getElementById('openModal'));
-        const imgModal = new bootstrap.Modal(document.getElementById('imageModal'));
+        modal = new bootstrap.Modal(document.getElementById('openModal'));
+        imgModal = new bootstrap.Modal(document.getElementById('imageModal')); //For Gallery Function
+        imgSelector = $("#ImageSelector");
         let id;
-        let src;
 
-        // Modal Functions for pop up
-        function openModal() {
-          modal.show();
-          $("#update").hide();
-          $("#save").show();
-        }
-        function closeModal(){
-            deleteModal.hide();
-        }
 
         // Load the controller of list (partial view) ///////////////////////////////////
         $(document).ready(function () {
@@ -135,29 +124,6 @@
             $("#ImageSelector").load("/Gallery/SelectImage");
             }catch(err){
                 console.log(err);
-            }
-        });
-
-        $(document).on("click","#loadGallery",function(){
-            $("#ImageSelector").load("/Gallery/SelectImage");
-            imgModal.show();
-        });
-
-
-        //Image Capture and Preview //////////////////////////////////////////////////////////////////
-        $(document).on("click","#imgSelect",function(){
-            let img = $(".img-check:checked");
-            if(img.length>0){
-                img.each(function(){
-                console.log($(this).val());
-                let value = $(this).val();
-                src = $(this).closest("label").find("img").attr("src");
-                $("#imagePreview").attr("src",src);
-                $("#GID").val(value);
-                imgModal.hide();
-            });
-            }else{
-                $("#result").html("<div class='alert alert-danger'>No Image Selected</div>");
             }
         });
 
@@ -204,12 +170,8 @@
          // Update Data through AJAX ////////////////////////////////////////////////////
         function Manage(event,id,action){
             event.preventDefault();
-            console.log("hit the ajax");
-
             try{
                 let formData = new FormData($("#form")[0]);
-                console.log(formData);
-
                 $.ajax({
                     url:`/About/${action}/${id}`,
                     type:'POST',

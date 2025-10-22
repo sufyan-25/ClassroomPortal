@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SymphonyLimited.Models.Course>
 @if (Model == null || !Model.Any())
 {
-    <div class="alert alert-warning">Data Loading...</div>
+    <div class="alert alert-danger">Nothing Found</div>
 }
 else
 {
@@ -44,7 +44,15 @@ else
                                     {
                                             <div class="col-md-4 col-lg-3">
                                                 <div class="card h-100 shadow-sm border-0">
-                                                    <img src="~/img/sym.jpg" class="card-img-top" style="width:150px" alt="Topic Image">
+                                                    @if (y.Gallery != null)
+                                                    {
+                                                        <img src="data:image/jpeg;base64,@y.Gallery.Thumb64" class="card-img-top" style="width:150px" alt="Topic Image">
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <img />
+                                                    }
                                                     <div class="card-body">
                                                         <h5 class="card-title text-primary">@y.Name</h5>
                                                         <p class="card-text text-muted text-truncate">@y.Description</p>
@@ -67,7 +75,7 @@ else
         </table>
     </div>
 }
-
+@* 
 <div class="container-fluid p-0">
     <!-- Course Cover Section -->
     <div class="position-relative">
@@ -109,7 +117,7 @@ else
         <!-- Topic 2 -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm border-0">
-                <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Topic Image">
+                <img src="" class="card-img-top" alt="Topic Image">
                 <div class="card-body">
                     <h5 class="card-title text-primary">CSS Styling</h5>
                     <p class="card-text text-muted">Style and design responsive web layouts using CSS and modern grid/flexbox techniques.</p>
@@ -120,7 +128,7 @@ else
         <!-- Topic 3 -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm border-0">
-                <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Topic Image">
+                <img src="" class="card-img-top" alt="Topic Image">
                 <div class="card-body">
                     <h5 class="card-title text-primary">JavaScript Essentials</h5>
                     <p class="card-text text-muted">Build interactive websites with JavaScript fundamentals — variables, functions, and event handling.</p>
@@ -131,7 +139,7 @@ else
         <!-- Topic 4 -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm border-0">
-                <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Topic Image">
+                <img src="" class="card-img-top" alt="Topic Image">
                 <div class="card-body">
                     <h5 class="card-title text-primary">Backend with PHP & MySQL</h5>
                     <p class="card-text text-muted">Understand server-side development, database integration, and API building for real-world apps.</p>
@@ -139,4 +147,4 @@ else
             </div>
         </div>
     </div>
-</div>
+</div> *@

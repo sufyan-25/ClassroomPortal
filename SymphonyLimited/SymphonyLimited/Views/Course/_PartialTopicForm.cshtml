@@ -1,44 +1,39 @@
 ﻿@model SymphonyLimited.Models.Topic
 
 <!-- Form -->
-<div class="modal fade" id="otherModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Add Course</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form asp-action="Create" asp-controller="Course" id="form" enctype="multipart/form-data">
-                <div class="modal-body">
-                    @Html.AntiForgeryToken()
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label fw-semibold"></label>
-                        <input asp-for="Name" name="Name" type="text" class="form-control" id="Name" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Description" class="form-label fw-semibold">Description</label>
-                        <textarea asp-for="Description" name="Description" class="form-control" id="Description" rows="2"></textarea>
-                        <span asp-validation-for="Description" class="text-danger"></span>
-                        @*
-                        <div class="d-flex">
-                            <img src="~/img/no_img.jpg"
-                                 alt="Current About Image"
-                                 class="border-0 mx-3" style="width:150px;" id="imagePreview">
-                        </div> 
-                        *@
-                    </div>
-                    @* <div class="mb-3">
-                        <label asp-for="ImageFile" for="image" class="form-label"></label>
-                        <input hidden type="text" id="oldimg" name="oldImage" class="form-control">
-                        <input asp-for="ImageFile" type="file" onchange="PreviewImage(event)" id="img" name="ImageFile" class="form-control">
-                        <span asp-validation-for="ImageFile" class="text-danger"></span>
-                    </div> *@
-                    <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
-                    <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
-                    <button type="reset" id="clear" class="btn btn-secondary px-4">Clear</button>
-                </div>
-            </form>
+
+<form asp-action="CreateTopic" asp-controller="Course" id="form" enctype="multipart/form-data">
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label fw-semibold"></label>
+            <input asp-for="Name" name="Name" type="text" class="form-control" id="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
+        <div class="mt-3">
+            <label asp-for="CourseID"></label>
+            <select asp-for="CourseID" class="form-control" asp-items="ViewBag.CourseList">
+                <option value="">-- Select Exam --</option>
+            </select>
+            <span asp-validation-for="CourseID"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label fw-semibold">Description</label>
+            <div class="d-flex">
+                <img src="~/img/no_img.jpg"
+                     alt="Current About Image"
+                     class="border-0 mx-3 imagePreview" style="width:150px;">
+                <textarea asp-for="Description" name="Description" class="form-control" id="Description" rows="2"></textarea>
+            </div>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <input asp-for="GalleryID" type="text" class="GID" name="GalleryID" hidden />
+            <span asp-validation-for="GalleryID" class="text-danger"></span>
+            <button type="button" onclick="openModal(imgModal)" class="btn btn-warning px-4">Select Image</button>
+        </div>
+        <button id="save" type="submit" class="btn btn-success px-4">Add New</button>
+        <button id="update" type="button" class="btn btn-secondary px-4" style="display:none;">Update Changes</button>
+        <button type="reset" id="clear" class="btn btn-secondary px-4">Clear</button>
     </div>
-</div>
+</form>

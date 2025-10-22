@@ -25,11 +25,13 @@ wwwroot\img\exam (2).png
 wwwroot\img\feature.jpg
 wwwroot\img\git-version.png
 wwwroot\img\header.jpg
+wwwroot\img\js.png
 wwwroot\img\no_img.jpg
 wwwroot\img\overlay-bottom.png
 wwwroot\img\overlay-top.png
 wwwroot\img\page-header.jpg
 wwwroot\img\skeleton_load.gif
+wwwroot\img\student3 (2).jpg
 wwwroot\img\sym.jpg
 wwwroot\img\team-1.jpg
 wwwroot\img\team-2.jpg
@@ -37,6 +39,8 @@ wwwroot\img\team-3.jpg
 wwwroot\img\team-4.jpg
 wwwroot\img\testimonial-1.jpg
 wwwroot\img\testimonial-2.jpg
+wwwroot\img\web-dev.jpg
+wwwroot\js\gallery.js
 wwwroot\js\main.js
 wwwroot\js\modal.js
 wwwroot\js\site.js

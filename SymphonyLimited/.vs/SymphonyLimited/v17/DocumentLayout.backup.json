@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\about\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\about\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\controllers\\aboutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\controllers\\aboutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\course\\_partialcourselist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\course\\_partialcourselist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\course\\_partialtopicform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\course\\_partialtopicform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\about\\_partialaboutlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\about\\_partialaboutlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\course\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\course\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\views\\gallery\\_partialselectimage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\views\\gallery\\_partialselectimage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|c:\\users\\hp\\desktop\\project symphony\\symphonylimited\\symphonylimited\\wwwroot\\js\\gallery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{06AAD5D8-5813-4939-9076-D6E89F56AABF}|SymphonyLimited\\SymphonyLimited.csproj|solutionrelative:symphonylimited\\wwwroot\\js\\gallery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "SymphonyLimited\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T08:31:36.859Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_PartialAboutList.cshtml",
-              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\About\\_PartialAboutList.cshtml",
-              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\About\\_PartialAboutList.cshtml",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\About\\_PartialAboutList.cshtml",
-              "RelativeToolTip": "SymphonyLimited\\Views\\About\\_PartialAboutList.cshtml",
-              "ViewState": "AgIAABAAAAAAAAAAAAAAABgAAAAVAAAAAAAAAA==",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Course\\Index.cshtml",
+              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\Course\\Index.cshtml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Course\\Index.cshtml",
+              "RelativeToolTip": "SymphonyLimited\\Views\\Course\\Index.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAADEAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-20T22:33:01.061Z",
+              "WhenOpened": "2025-10-21T22:37:45.947Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\About\\Index.cshtml",
-              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\About\\Index.cshtml",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\About\\Index.cshtml*",
-              "RelativeToolTip": "SymphonyLimited\\Views\\About\\Index.cshtml*",
-              "ViewState": "AgIAAM8AAAAAAAAAAAAAAOYAAABZAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "_PartialTopicForm.cshtml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Course\\_PartialTopicForm.cshtml",
+              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\Course\\_PartialTopicForm.cshtml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Course\\_PartialTopicForm.cshtml",
+              "RelativeToolTip": "SymphonyLimited\\Views\\Course\\_PartialTopicForm.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAA4AAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-20T21:15:39.563Z",
+              "WhenOpened": "2025-10-22T12:07:05.691Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "_PartialSelectImage.cshtml",
-              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Gallery\\_PartialSelectImage.cshtml",
-              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\Gallery\\_PartialSelectImage.cshtml",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Gallery\\_PartialSelectImage.cshtml",
-              "RelativeToolTip": "SymphonyLimited\\Views\\Gallery\\_PartialSelectImage.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-20T21:19:56.747Z",
+              "Title": "gallery.js",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\wwwroot\\js\\gallery.js",
+              "RelativeDocumentMoniker": "SymphonyLimited\\wwwroot\\js\\gallery.js",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\wwwroot\\js\\gallery.js",
+              "RelativeToolTip": "SymphonyLimited\\wwwroot\\js\\gallery.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-10-21T18:49:43.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AboutController.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Controllers\\AboutController.cs",
-              "RelativeDocumentMoniker": "SymphonyLimited\\Controllers\\AboutController.cs",
-              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Controllers\\AboutController.cs",
-              "RelativeToolTip": "SymphonyLimited\\Controllers\\AboutController.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAAACMAAAAIAAAAAAAAAA==",
+              "Title": "_PartialCourseList.cshtml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Course\\_PartialCourseList.cshtml",
+              "RelativeDocumentMoniker": "SymphonyLimited\\Views\\Course\\_PartialCourseList.cshtml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Views\\Course\\_PartialCourseList.cshtml",
+              "RelativeToolTip": "SymphonyLimited\\Views\\Course\\_PartialCourseList.cshtml",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAAC4AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T17:52:49.382Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "SymphonyLimited\\Controllers\\CourseController.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\Project Symphony\\SymphonyLimited\\SymphonyLimited\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "SymphonyLimited\\Controllers\\CourseController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAABQAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T21:12:30.814Z",
+              "WhenOpened": "2025-10-21T16:36:43.497Z",
               "EditorCaption": ""
             }
           ]
