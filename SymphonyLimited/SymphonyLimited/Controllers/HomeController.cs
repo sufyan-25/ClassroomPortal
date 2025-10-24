@@ -16,8 +16,10 @@ namespace SymphonyLimited.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var courses = await _context.Courses.Include(x => x.Topics).ThenInclude(t => t.Gallery).ToListAsync();
+            ViewBag.Courses = courses;
             return View();
         }
         public async Task<IActionResult> About()
@@ -42,8 +44,8 @@ namespace SymphonyLimited.Controllers
         public IActionResult CourseDetail() {
             return View();
         }
-        public IActionResult ExamDetail() {
-            var exam = _context.Exams.ToList();
+        public async Task<IActionResult> ExamDetail() {
+            var exam = await _context.Exams.Include(x=>x.Gallery).ToListAsync();
             return View(exam);
         }
         [HttpPost]

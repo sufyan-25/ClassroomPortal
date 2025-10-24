@@ -58,53 +58,6 @@
     </div>
 </div>
 <!-- About End -->
-<!-- Feature Start -->
-<div class="container-fluid bg-image" style="margin: 90px 0;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 my-5 pt-5 pb-lg-5">
-                <div class="section-title position-relative mb-4">
-                    <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Why Choose Us?</h6>
-                    <h1 class="display-4">Why You Should Start Learning with Us?</h1>
-                </div>
-                <p class="mb-4 pb-2">Aliquyam accusam clita nonumy ipsum sit sea clita ipsum clita, ipsum dolores amet voluptua duo dolores et sit ipsum rebum, sadipscing et erat eirmod diam kasd labore clita est. Diam sanctus gubergren sit rebum clita amet.</p>
-                <div class="d-flex mb-3">
-                    <div class="btn-icon bg-primary mr-4">
-                        <i class="fa fa-2x fa-graduation-cap text-white"></i>
-                    </div>
-                    <div class="mt-n1">
-                        <h4>Skilled Instructors</h4>
-                        <p>Labore rebum duo est Sit dolore eos sit tempor eos stet, vero vero clita magna kasd no nonumy et eos dolor magna ipsum.</p>
-                    </div>
-                </div>
-                <div class="d-flex mb-3">
-                    <div class="btn-icon bg-secondary mr-4">
-                        <i class="fa fa-2x fa-certificate text-white"></i>
-                    </div>
-                    <div class="mt-n1">
-                        <h4>International Certificate</h4>
-                        <p>Labore rebum duo est Sit dolore eos sit tempor eos stet, vero vero clita magna kasd no nonumy et eos dolor magna ipsum.</p>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="btn-icon bg-warning mr-4">
-                        <i class="fa fa-2x fa-book-reader text-white"></i>
-                    </div>
-                    <div class="mt-n1">
-                        <h4>Online Classes</h4>
-                        <p class="m-0">Labore rebum duo est Sit dolore eos sit tempor eos stet, vero vero clita magna kasd no nonumy et eos dolor magna ipsum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5" style="min-height: 500px;">
-                <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100" src="img/feature.jpg" style="object-fit: cover;">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Feature Start -->
 <!-- Courses Start -->
 <div class="container-fluid px-0 py-5">
     <div class="row mx-0 justify-content-center pt-5">
@@ -207,46 +160,28 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top:20px; display:flex; align-items:center;">
-        <h1 class="text-white" style="margin:20px auto;">Web Development</h1>
-    </div>
-</div>
-<div class="row justify-content-center bg-image mx-0 mb-5">
-    <div class="col-lg-6 py-5">
-        <div class="bg-white p-5 my-5">
-            <h1 class="text-center mb-4">30% Off For New Students</h1>
-            <form>
-                <div class="form-row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="padding: 30px 20px;">
+    <div class="container-fluid px-0 py-5">
+        @foreach (var x in ViewBag.Courses)
+        {
+            <h1 class="text-white text-center">@x.Name</h1>
+                <div class="owl-carousel courses-carousel">
+            @foreach (var y in x.Topics)
+            {
+                    <div class="courses-item position-relative">
+                        <img class="img-fluid" src="data:image/jpeg;base64,@y.Gallery.ImageBs64" alt="">
+                        <div class="courses-text">
+                            <h4 class="text-center text-white px-3">@y.Name</h4>
+                            <div class="border-top w-100 mt-3">
+                            </div>
+                            <div class="w-100 bg-white text-center p-4">
+                                <a class="btn btn-primary" asp-action="ExamDetail" asp-controller="Home">Enroll Now</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="padding: 30px 20px;">
-                        </div>
-                    </div>
+            }
                 </div>
-                <div class="form-row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <select class="custom-select bg-light border-0 px-3" style="height: 60px;">
-                                <option selected>Select A courses</option>
-                                <option value="1">courses 1</option>
-                                <option value="2">courses 1</option>
-                                <option value="3">courses 1</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <button class="btn btn-primary btn-block" type="submit" style="height: 60px;">Sign Up Now</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        }
     </div>
-</div>
 </div>
 <!-- Courses End -->
 <!-- Team Start -->

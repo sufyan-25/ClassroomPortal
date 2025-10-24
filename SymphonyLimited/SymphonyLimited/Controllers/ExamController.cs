@@ -15,8 +15,8 @@ namespace SymphonyLimited.Controllers
         {
             return View();
         }
-        public IActionResult List() {
-            var exam = _context.Exams.ToList();
+        public async Task<IActionResult> List() {
+            var exam = await _context.Exams.Include(x=>x.Gallery).ToListAsync();
             return PartialView("_PartialExamList", exam);
         }
         [HttpPost]
@@ -30,11 +30,7 @@ namespace SymphonyLimited.Controllers
                     TempData["Error"] = "Model Error";
                     return RedirectToAction(nameof(Index));
                 }
-                if (exam == null)
-                {
-                    TempData["Error"] = "Fill all the fields";
-                    return RedirectToAction(nameof(Index));
-                }
+
                 _context.Exams.Add(exam);
                 _context.SaveChanges();
                 TempData["Success"] = "Data added successfully";

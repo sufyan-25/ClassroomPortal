@@ -7,86 +7,62 @@
     <div class="container-fluid">
         <!-- Dashboard Cards -->
         <div class="row g-3 mb-4">
+            <div class="card p-3">
+                <h3 class="card-title">Students Details</h3>
+                <p class="text-muted mb-0">Passed, Failed, Entrance, Enrolled</p>
+            </div>
             @foreach (var item in ViewBag.StCount)
             {
                 <div class="col-md-3">
                     <div class="card p-3">
                         <h5 class="card-title">@item.Status : Student</h5>
                         <p class="card-text fs-4 fw-bold">@item.Count</p>
-                        <p class="text-muted mb-0">This Month</p>
-                        <button class="btn btn-primary btn-sm" onclick="">View Details</button>
                     </div>
                 </div>
             }
         </div>
-
-        <!-- New Added -->
-        <!-- Charts Section -->
-        @* <div class="row g-3 mb-4">
-            <div class="col-md-6">
+        <div class="row g-3 mb-4">
+            <div class="card p-3">
+                <h3 class="card-title">Courses Details</h3>
+                <p class="text-muted mb-0">Courses, Topics etc</p>
+            </div>
+            <div class="col-md-3">
                 <div class="card p-3">
-                    <h5 class="card-title">Monthly Sales</h5>
-                    <canvas id="salesChart" height="150"></canvas>
+                    <h5 class="card-title">Courses</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewBag.CourseCount</p>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="card p-3">
-                    <h5 class="card-title">New Customers</h5>
-                    <canvas id="customersChart" height="150"></canvas>
+                    <h5 class="card-title">Topics</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewBag.TopicCount</p>
                 </div>
             </div>
-        </div> *@
-        <!-- Table -->
-        <div class="table-responsive mb-4">
-            <table class="table align-middle">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Toy Car</td>
-                        <td>Vehicles</td>
-                        <td>Rs. 1200</td>
-                        <td>30</td>
-                        <td>
-                            <button class="btn-action">Edit</button>
-                            <button class="btn-action">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h5 class="card-title">Topics</h5>
+                    <p class="card-text fs-4 fw-bold">@ViewBag.TopicCount</p>
+                </div>
+            </div>
         </div>
-
-        <!-- Edit Product Modal -->
-        <div class="modal fade" id="gallery" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">Select Image</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="d-flex gap-3">
-                            <label class="position-relative">
-                                <input type="radio" name="imageSelect" value="" class="form-check-input getImage position-absolute top-0 end-0 m-2">
-                                <img src="" class="border rounded" width="150" height="150">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" id="getImage">Save Changes</button>
-                    </div>
+        <div class="row g-3 mb-4">
+            <div class="card p-3">
+                <h3 class="card-title">Branches</h3>
+                <div>
+                <p class="text-muted mb-0">Active Branches</p>
+                    <a asp-controller="Contact" asp-action="Index" class="btn btn-primary">View Details</a>
                 </div>
             </div>
+            @foreach(var x in ViewBag.Branches)
+            {
+            <div class="col-md-3">
+                <div class="card p-3">
+                    <h5 class="card-title">@x.BranchName</h5>
+                        <p class="text-muted mb-0">PTCL : @x.PTCL</p>
+                        <p class="text-muted mb-0">Whatsapp : @x.Whatsapp</p>
+                </div>
+            </div>
+            }
         </div>
     </div>
 </div>
@@ -97,61 +73,6 @@
 
 @section Scripts {
     <script>
-
-        // // Sales Chart
-        // const ctxSales = document.getElementById('salesChart');
-        // new Chart(ctxSales, {
-        //   type: 'bar',
-        //   data: {
-        //     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        //     datasets: [{
-        //       label: 'Sales (Rs)',
-        //       data: [12000, 19000, 15000, 22000, 28000, 24000],
-        //       backgroundColor: '#2a5298'
-        //     }]
-        //   },
-        //   options: {
-        //     responsive: true,
-        //     plugins: { legend: { display: false } }
-        //   }
-        // });
-
-        // // Customers Chart
-        // const ctxCustomers = document.getElementById('customersChart');
-        // new Chart(ctxCustomers, {
-        //   type: 'line',
-        //   data: {
-        //     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        //     datasets: [{
-        //       label: 'Customers',
-        //       data: [5, 9, 6, 11, 15, 13],
-        //       borderColor: '#1e3c72',
-        //       fill: false,
-        //       tension: 0.3
-        //     }]
-        //   },
-        //   options: {
-        //     responsive: true,
-        //     plugins: { legend: { display: false } }
-        //   }
-        // });
-        // const gallery = new bootstrap.Modal(document.getElementById('gallery'));
-        // let imageSelected = document.getElementById("imageSelected");
-        // document.getElementById("selec").addEventListener("click",function(){
-        // gallery.show();
-        // });
-        // document.getElementById("getImage").addEventListener("click",function(){
-        //     let checed = document.querySelectorAll(".getImage:checked");
-        //     if(checed.length>0){
-        //         checed.forEach(ch=>{
-        //             imageSelected.value = ch.value;
-        //         });
-        //     }
-        //     let addimg = document.getElementById("addImage");
-        //     let img = `<img src="data:image/jpeg;base64,${imageSelected.value}">`;
-        //     addimg.html= img;
-        //     gallery.hide();
-        // });
 
     </script>
 

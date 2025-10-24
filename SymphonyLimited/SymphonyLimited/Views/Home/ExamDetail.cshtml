@@ -22,7 +22,7 @@
 
                 <div class="row align-items-center mb-5">
                     <div class="col-md-6">
-                        <img src="~/img/exam.png" alt="Exam Image" class="img-fluid rounded shadow-sm">
+                        <img src="data:image/jpeg;base64,@ex.Gallery.ImageBs64" alt="Exam Image" class="img-fluid rounded shadow-sm">
                     </div>
                     <div class="col-md-6">
                         <h4 class="fw-semibold text-secondary">Overview</h4>
@@ -83,7 +83,7 @@
                 </p>
                 <form action="/Home/ResultSearch" method="post">
                     <input type="number" class="form-control" name="id" placeholder="Search by Student ID" required/>
-                    <button type="submit" class="btn btn-primary mt-3">Download Registration Form</button>
+                    <button type="submit" class="btn btn-warning mt-3">Search Results</button>
                 </form>
             </div>
         </div>

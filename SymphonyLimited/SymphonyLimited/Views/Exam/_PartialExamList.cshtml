@@ -26,13 +26,12 @@ else
                     <tr>
                         <td>@x.Id</td>
                         <td>@x.Title</td>
-                        <td>@x.Desc</td>
+                        <td class="text-truncate" style="max-width: 250px;">@x.Desc</td>
                         <td>@x.ExamDate</td>
                         <td>@x.ExamTime</td>
                         <td>@x.Fee</td>
                         <td>
-                            <button class="btn-action" id="edit">Edit</button>
-                            <button class="btn-action" id="delete">Delete</button>
+                            <button class="btn btn-danger" id="delete">Delete</button>
                         </td>
                     </tr>
                 }

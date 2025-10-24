@@ -19,7 +19,7 @@
             <div>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-primary m-0">Manage Exam Details</h4>
-                    <button class="btn btn-success btn-md" onclick="openModal()">Add Upcoming Exam</button>
+                    <button class="btn btn-success btn-md" onclick="openModal(modal)">Add Upcoming Exam</button>
                 </div>
                 <div class="faqContainer">
                     <div id="spinnerLoader">
@@ -34,7 +34,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="openModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
@@ -59,9 +59,19 @@
                         <span asp-validation-for="Title"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Desc" class="form-label"></label>
-                        <input asp-for="Desc" type="text" id="question" class="form-control">
-                        <span asp-validation-for="Desc"></span>
+                        <label asp-for="Desc" class="form-label fw-semibold"></label>
+                        <div class="d-flex">
+                            <img src="~/img/no_img.jpg"
+                                 alt="Current About Image"
+                                 class="border-0 mx-3 imagePreview" style="width:150px;">
+                            <textarea asp-for="Desc" name="Desc" class="form-control fDesc" id="Desc" rows="2"></textarea>
+                        </div>
+                        <span asp-validation-for="Desc" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <input asp-for="GalleryID" type="text" class="GID" name="GalleryID" hidden />
+                        <span asp-validation-for="GalleryID" class="text-danger"></span>
+                        <button type="button" onclick="openModal(imgModal)" class="btn btn-warning px-4">Select Image</button>
                     </div>
                     <div class="mb-3">
                         <label asp-for="ExamDate" class="form-label"></label>
@@ -88,6 +98,25 @@
         </div>
     </div>
 </div>
+
+<!-- Modal For Gallery -->
+<div class="modal fade imageModal" id="imgModal" tabindex="-3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Select Image</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="ImageSelector">
+                <!-- Partial Page Load Here-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="imgSelect">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -105,28 +134,24 @@
 @section Scripts {
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/js/gallery.js"></script>
     <script>
         // Load the controller of list (partial view)
         $(document).ready(function () {
             try{
             $(".faqContainer").load("/Exam/List");
+            $("#ImageSelector").load("/Gallery/SelectImage");
             }catch(err){
                 console.log(err);
             }
          });
-         //Modal
-         const modal = new bootstrap.Modal(document.getElementById('editModal'));
-         const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        function openModal() {
-          modal.show();
-          $("#title").text("Add Student");
-          $("#update").hide();
-          $("#save").show();
-        }
-        function closeModal() {
-          $("#save").show();
-          $("#update").hide();
-        }
+         //Variabls Declaration for gallery and modal
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        modal = new bootstrap.Modal(document.getElementById('openModal'));
+        // modal2 = new bootstrap.Modal(document.getElementById('otherModal'));
+        imgModal = new bootstrap.Modal(document.getElementById('imgModal')); //For Gallery Function
+        imgSelector = $("#ImageSelector");
+        let id;
 
         // Edit code for post data
         function Manage(id="",action,arr){
@@ -137,7 +162,7 @@
 
             let data={Question:arr[0],Answer:arr[1],id:id};
             $.ajax({
-                url:`FAQ/${action}`,
+                url:`Exam/${action}`,
                 type:'POST',
                 data: data,
                 dataType:'json',
@@ -151,26 +176,6 @@
                 console.log(err+" Failed to Post Data "+action);
             }
         }
-        let id;
-        // Edit get value
-        // $(document).on("click","#edit",function(){
-        //     $("#title").text("Edit FAQ");
-        //     let oldQues = $(this).closest(".accordion-item").find("#editQue").text();
-        //     let oldAns = $(this).closest(".accordion-item").find("#editAns").text();
-        //     id = $(this).closest(".accordion-item").find(".FID").val();
-        //     $("#question").val(oldQues);
-        //     $("#answer").val(oldAns);
-        //     $("#update").show();
-        //     $("#save").hide();
-        //     modal.show();
-        //  });
-
-         //Update Edit Value
-        $("#update").on("click",()=>{
-            let array = [$("#question").val(),$("#answer").val()];
-            // Manage(id,"Edit",array);
-            id;
-        });
 
         //Delete Branches
         $(document).on("click","#delete",function(){

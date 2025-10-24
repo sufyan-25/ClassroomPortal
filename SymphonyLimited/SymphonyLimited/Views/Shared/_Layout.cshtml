@@ -47,16 +47,16 @@
                         <span class="nav-text">Exams</span>
                     </a>
                 </li>
+                <li class="@(currentController == "Result" ? "active" : "")">
+                    <a asp-controller="Result" asp-action="Create">
+                        <i class="fa fa-align-left fa-lg"></i>
+                        <span class="nav-text">Result</span>
+                    </a>
+                </li>
                 <li class="has-subnav @(currentController == "Course" ? "active" : "")">
                     <a asp-controller="Course" asp-action="Index">
                         <i class="fa fa-plane fa-lg"></i>
                         <span class="nav-text"> Courses </span>
-                    </a>
-                </li>
-                <li class="@(currentController == "About" ? "active" : "")">
-                    <a asp-controller="About" asp-action="Index">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="nav-text"> About </span>
                     </a>
                 </li>
                 <li class="@(currentController == "Gallery" ? "active" : "")">
@@ -65,48 +65,28 @@
                         <span class="nav-text"> Gallery </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="@(currentController == "About" ? "active" : "")">
+                    <a asp-controller="About" asp-action="Index">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="nav-text"> About </span>
+                    </a>
+                </li>
+                <li class="@(currentController == "FAQ" ? "active" : "")">
+                    <a asp-controller="FAQ" asp-action="Index">
                         <i class="fa fa-flask fa-lg"></i>
-                        <span class="nav-text"> Web Tools </span>
+                        <span class="nav-text"> FAQs </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-picture-o fa-lg"></i>
-                        <span class="nav-text"> Art & Design </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-align-left fa-lg"></i>
-                        <span class="nav-text"> Magazines </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-gamepad fa-lg"></i>
-                        <span class="nav-text"> Games </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-glass fa-lg"></i>
-                        <span class="nav-text"> Life & Style </span>
+                <li class="@(currentController == "Contact" ? "active" : "")">
+                    <a asp-controller="Contact" asp-action="Index">
+                        <i class="fa fa-flask fa-lg"></i>
+                        <span class="nav-text"> Contacts </span>
                     </a>
                 </li>
                 <li class="has-subnav">
-                    <a href="#">
+                    <a asp-controller="Auth" asp-action="Logout">
                         <i class="fa fa-rocket fa-lg"></i>
-                        <span class="nav-text"> Fun </span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="logout">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-lightbulb-o fa-lg"></i>
-                        <span class="nav-text"> BLOG </span>
+                        <span class="nav-text"> LogOut </span>
                     </a>
                 </li>
             </ul>

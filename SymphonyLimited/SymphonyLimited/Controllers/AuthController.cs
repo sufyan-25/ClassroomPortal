@@ -57,7 +57,14 @@ namespace SymphonyLimited.Controllers
         public async Task<IActionResult> Dashboard()
         {
             var stCount = await _context.Students.Include(x => x.Results).GroupBy(s => s.Status).Select(g => new { Status = g.Key, Count = g.Count()}).ToListAsync();
+            var courseCount = _context.Courses.Count();
+            var topicCount = _context.Topics.Count();
+            var branches = _context.Contacts.ToList();
+
             ViewBag.StCount = stCount;
+            ViewBag.CourseCount = courseCount;
+            ViewBag.TopicCount = topicCount;
+            ViewBag.Branches = branches;
             return View();
         }
         public IActionResult Forbidden()

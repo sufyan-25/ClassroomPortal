@@ -20,17 +20,21 @@ wwwroot\img\courses-4.jpg
 wwwroot\img\courses-5.jpg
 wwwroot\img\courses-6.jpg
 wwwroot\img\courses-80x80.jpg
-wwwroot\img\css.png
+wwwroot\img\css (2).png
+wwwroot\img\database-course.jpg
+wwwroot\img\database1.jpg
+wwwroot\img\database2.jpg
 wwwroot\img\exam (2).png
 wwwroot\img\feature.jpg
 wwwroot\img\git-version.png
 wwwroot\img\header.jpg
-wwwroot\img\js.png
+wwwroot\img\js (2).png
 wwwroot\img\no_img.jpg
 wwwroot\img\overlay-bottom.png
 wwwroot\img\overlay-top.png
 wwwroot\img\page-header.jpg
 wwwroot\img\skeleton_load.gif
+wwwroot\img\SQL.jpg
 wwwroot\img\student3 (2).jpg
 wwwroot\img\sym.jpg
 wwwroot\img\team-1.jpg

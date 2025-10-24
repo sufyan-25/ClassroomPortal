@@ -18,7 +18,9 @@ else
                 </tr>
             </thead>
             <tbody>
-                @{var index = 0;}
+                @{
+                    var index = 0;
+                }
                 @foreach (var x in Model)
                 {
                     <tr>
@@ -28,8 +30,10 @@ else
                         <td>@x.Fee</td>
                         <td>
                             <input type="text" id="FID" value="@x.Id" hidden />
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="@(index>=0 ? $"#topic{index}":"")">Topics</button>
-                            <button class="btn btn-sm btn-warning" id="edit">Edit</button>
+                            <input type="text" id="getGid" value="@x.GalleryID" hidden />
+                            <img src="data:image/jpeg;base64,@x.Gallery.Thumb64" hidden />
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="@(index >= 0 ? $"#topic{index}" : "")">Topics</button>
+                            <button class="btn btn-sm btn-warning" onclick="EditData(this,'edit')" id="edit">Edit</button>
                             <button class="btn btn-sm btn-danger" id="delete">Delete</button>
                         </td>
                     </tr>
@@ -39,32 +43,34 @@ else
                             <div class="collapse" id="@(index >= 0 ? $"topic{index}" : "")">
                                 <div class="p-3 bg-light">
                                     <h6 class="fw-bold text-secondary">Course Topics</h6>
-                                        <div class="row g-4">
-                                    @foreach (var y in x.Topics)
-                                    {
+                                    <div class="row g-4">
+                                        @foreach (var y in x.Topics)
+                                        {
                                             <div class="col-md-4 col-lg-3">
                                                 <div class="card h-100 shadow-sm border-0">
                                                     @if (y.Gallery != null)
                                                     {
-                                                        <img src="data:image/jpeg;base64,@y.Gallery.Thumb64" class="card-img-top" style="width:150px" alt="Topic Image">
+                                                        <img src="data:image/jpeg;base64,@y.Gallery.Thumb64" class="card-img-top" style="width:150px" alt="@y.Gallery.AltText">
 
                                                     }
                                                     else
                                                     {
-                                                        <img />
+                                                        <img src="~/img/no_img.jpg" class="card-img-top" style="width:150px" alt="Topic Image" />
                                                     }
                                                     <div class="card-body">
+                                                        <input type="text" id="FID2" value="@y.Id" hidden />
+                                                        <input type="text" id="getGid2" value="@y.GalleryID" hidden />
+                                                        <input type="text" id="CID" value="@y.CourseID" hidden />
                                                         <h5 class="card-title text-primary">@y.Name</h5>
                                                         <p class="card-text text-muted text-truncate">@y.Description</p>
+                                                        <button class="btn btn-warning btn-md" onclick="EditData(this,'edit2')" id="edit2">Edit</button>
                                                     </div>
-                                                    <div class="card-footer bg-transparent border-0 text-center">
-                                                        <button class="btn btn-primary w-100">Enroll Now</button>
-                                                    </div>
+                                                    @* <div class="card-footer bg-transparent border-0 text-center"> *@
+                                                    @* </div> *@
                                                 </div>
                                             </div>
-                                    }
-                                        </div>
-                                    <button class="btn btn-sm btn-success">Add New Topic</button>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </td>

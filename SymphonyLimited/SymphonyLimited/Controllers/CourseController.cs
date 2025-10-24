@@ -63,5 +63,9 @@ namespace SymphonyLimited.Controllers
         {
             return Json(new {success=true,message="Data Received"});
         }
+        public JsonResult EditTopic(int id,Topic topic)
+        {
+            return Json(new {success=true,message="Data Received"});
+        }
     }
 }
